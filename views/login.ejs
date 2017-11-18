@@ -1,0 +1,42 @@
+<% layout('layouts/page')%>
+<% stylesheet('css/login.css') %>
+<div class="container">
+    <form class="form-signin">
+        <h2 class="form-signin-heading">Please log in</h2>
+        <label for="inputEmail" class="sr-only">Username</label>
+        <input type="text" name="username" id="inputEmail" class="form-control" placeholder="Username" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <span class="help-block error"></span>
+    </form>
+</div>
+<script>
+    var d = $('form').attr('id', 'req-form');
+    d.on('submit', function() {
+        var form = $(this);
+        $('.error', form).html('');
+        var btn_subm = $(":submit", form)
+        btn_subm.text('Отправляется...');
+        btn_subm.prop('disabled', true);
+        $.ajax({
+            url: "/login",
+            method: "POST",
+            data: form.serialize(),
+            complete: function() {
+                btn_subm.prop('disabled', false);
+                btn_subm.text("Log in");
+            },
+            statusCode: {
+                200: function(success) {
+                    form.html("Вы вошли в сайт").addClass('alert-success');
+                    window.location.href = "/admin";
+                },
+                403: function(jqXHR) {
+                    $('.error', form).html(jqXHR.responseText);
+                }
+            }
+        });
+        return false;
+    });
+</script>

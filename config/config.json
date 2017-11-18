@@ -1,0 +1,26 @@
+{
+  "port": 3002,
+  "mysql": {
+    "uri" : "mysql://root:@127.0.0.1/test"
+  },
+  "mongoose": {
+    "uri": "mongodb://127.0.0.1:27017/test",
+    "options": {
+      "server": {
+        "socketOptions": {
+          "keepAlive": 1
+        }
+      }
+    }
+  },
+  "session": {
+    "secret": "KillerIsJim",
+    "key": "sid",
+    "cookie": {
+      "path": "/",
+      "httpOnly": true,
+      "maxAge": 1209600000
+    }
+  }
+
+}
