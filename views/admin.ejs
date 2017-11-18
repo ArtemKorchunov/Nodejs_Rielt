@@ -22,15 +22,18 @@
         </nav>
 
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
-            <div class="h2 border-bottom">Зарегестрировать риетора</div>
-            <form class="form-w form-group p-2 m-b">
+            <div class="h2 border-bottom">Зарегестрировать риелтора</div>
+            <form class="form-w form-group p-2 m-b" id="req-form">
                 <div class="form-group">
                     <label for="inputPassword4">Username</label>
-                    <input type="text" id="inputPassword4" class="form-control" aria-describedby="passwordHelpInline">
+                    <input type="text" name="username" id="inputPassword4" class="form-control" aria-describedby="passwordHelpInline">
                     <label for="inputPassword4">Password</label>
-                    <input type="password" id="inputPassword4" class="form-control" aria-describedby="passwordHelpInline">
+                    <input type="password" name="password" id="inputPassword4" class="form-control" aria-describedby="passwordHelpInline">
                 </div>
-                <button type="button" class="btn btn-outline-success w-100">Add</button>
+                <div class="form-group">
+                <button type="submit" class="btn btn-outline-success w-100">Add</button>
+                </div>
+
             </form>
             <h1>Dashboard</h1>
 
@@ -38,17 +41,61 @@
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
-                    <tr>
-                        <th></th>
-                        <th>Header</th>
-                        <th>Header</th>
-                        <th>Header</th>
-                        <th>Header</th>
-                    </tr>
+                        <tr>
+                            <th></th>
+                            <th>Username</th>
+                            <th>Date of creation</th>
+                            <th>Rights level</th>
+                        </tr>
                     </thead>
-
+                    <tbody>
+                    <% Users.forEach(function(user){ %>
+                        <tr>
+                            <td></td>
+                            <td><%= user.username %></td>
+                            <td> today </td>
+                            <td> <%= user.right_level %></td>
+                        </tr>
+                    <% }); %>
+                    </tbody>
                 </table>
             </div>
         </main>
     </div>
 </div>
+<script>
+    $('form').attr('id', 'req-form').on('submit', function() {
+        var form = $(this);
+        $('.error', form).html('');
+        var btn_subm = $(":submit", form)
+        btn_subm.text('Отправляется...');
+        btn_subm.prop('disabled', true);
+        $.ajax({
+            url: "/admin",
+            method: "POST",
+            data: form.serialize(),
+            complete: function() {
+                btn_subm.prop('disabled', false);
+                btn_subm.text("Log in");
+            },
+            statusCode: {
+                200: function(success) {
+                    $('form').attr('id', 'req-form').append(
+                        "<div class=\"alert alert-success\" role=\"alert\">" +
+                        "   This is a success alert—check it out!\n" +
+                        "</div>"
+                    );
+                    window.location.href = "/admin";
+                },
+                403: function(jqXHR) {
+                    $('form').attr('id', 'req-form').append(
+                        "<div class=\"alert alert-danger\" role=\"alert\">" +
+                            "This is a danger alert—check it out!" +
+                        "</div>"
+                    );
+                }
+            }
+        });
+        return false;
+    });
+</script>

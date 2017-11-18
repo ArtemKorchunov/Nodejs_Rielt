@@ -6,6 +6,7 @@ module.exports = function(app) {
 
     app.post('/login', require('./login').post);
     app.get('/admin',checkAuth , require('./admin').get);
+    app.post('/admin',checkAuth , require('./admin').post);
     app.get('/logout', checkAuth, require('./logout').get);
 
 

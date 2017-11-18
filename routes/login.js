@@ -9,9 +9,9 @@ exports.get = function(req, res, next) {
 exports.post = function (req, res, next) {
     var username = req.body.username;
     var password = req.body.password;
-    var person = req.models.person;
+    var User = req.models.User;
 
-    /*person.createUser(username,password, function (err, user) {
+    /*User.createUser(username,password, function (err, user) {
 
         if (user === undefined) {res.status(403).send(err);}
         else {
@@ -19,7 +19,7 @@ exports.post = function (req, res, next) {
             res.send("Вы вошли")
         }
     });*/
-    person.authorize(username,password, function (err, user) {
+    User.authorize(username,password, function (err, user) {
         if (user === undefined) {res.status(403).send('Incorrect password');}
         else {
             req.session.id_user = user.id;

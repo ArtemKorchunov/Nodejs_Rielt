@@ -1,7 +1,7 @@
 {
   "port": 3002,
   "mysql": {
-    "uri" : "mysql://root:@127.0.0.1/test"
+    "uri" : "mysql://root:@127.0.0.1/rielt"
   },
   "mongoose": {
     "uri": "mongodb://127.0.0.1:27017/test",

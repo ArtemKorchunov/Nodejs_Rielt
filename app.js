@@ -18,7 +18,7 @@ var options = {
     port: 3306,
     user: 'root',
     password: '',
-    database: 'test'
+    database: 'rielt'
 };
 
 var sessionStore = new MySQLStore(options);
@@ -35,7 +35,7 @@ app.use(session({
 var orm  = require('orm');
 app.use(orm.express(config.get('mysql:uri'), {
     define: function (db, models, next) {
-        models.person = require('./models/user')(db);
+        models.User = require('./models/user')(db);
         db.sync(function (err) { if (err) throw new err;});
         next();
     }

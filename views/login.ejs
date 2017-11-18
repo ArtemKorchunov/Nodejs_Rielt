@@ -12,8 +12,7 @@
     </form>
 </div>
 <script>
-    var d = $('form').attr('id', 'req-form');
-    d.on('submit', function() {
+    $('form').attr('id', 'req-form').on('submit', function() {
         var form = $(this);
         $('.error', form).html('');
         var btn_subm = $(":submit", form)
