@@ -1,11 +1,9 @@
 var bcrypt = require('bcrypt');
 var async = require('async');
-const uuidv4 = require('uuid/v4');
 const saltRounds = 10;
 module.exports = function User(db) {
     var User = db.define("user", {
-        id: String,
-        username: String,
+        username: {type: 'text', key: true},
         hashPassword: String,
         right_level: { type: "integer", defaultValue: 1 }
     }, {
@@ -23,9 +21,9 @@ module.exports = function User(db) {
     };
     User.createUser = function (username, password, cb) {
         User.find({ username: username }, 1, function (err, item){
-            if (item.length === 0) {
+            if (item === undefined || item.length === 0) {
                 User.password(password, function (hash) {
-                    var user = {id: uuidv4(), username: username, hashPassword: hash};
+                    var user = {username: username, hashPassword: hash};
                     User.create(user, function (err) {
                         if (err) throw err;
                         console.log("create successful!");

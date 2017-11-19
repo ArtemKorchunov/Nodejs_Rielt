@@ -29,7 +29,12 @@
             statusCode: {
                 200: function(success) {
                     form.html("Вы вошли в сайт").addClass('alert-success');
-                    window.location.href = "/admin";
+                    if (success.admin) {
+                        window.location.href = "/admin/control-panel";
+                    }
+                    else {
+                        window.location.href = "/user/control-panel";
+                    }
                 },
                 403: function(jqXHR) {
                     $('.error', form).html(jqXHR.responseText);

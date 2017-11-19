@@ -35,15 +35,21 @@ app.use(session({
 var orm  = require('orm');
 app.use(orm.express(config.get('mysql:uri'), {
     define: function (db, models, next) {
-        models.User = require('./models/user')(db);
-        db.sync(function (err) { if (err) throw new err;});
+        models.User = require('./models/user')(db,models);
+        models.User_profile = require('./models/user_profile')(db,models);
+        //db.drop(function () {
+            db.sync(function (err) {
+                if (err) throw new err;
+            });
+        //});
+
         next();
     }
 }));
 
 
 app.engine('ejs', require('ejs-locals'));
-app.set('views', __dirname + '/views');
+app.set('views', path.join(__dirname,'/views'));
 app.set('view engine', 'ejs');
 
 app.use(favicon(path.join(__dirname, 'public', 'favicon.png')));

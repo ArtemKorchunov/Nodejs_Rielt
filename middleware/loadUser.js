@@ -6,12 +6,13 @@ module.exports = function(req, res, next) {
         if (err) return next(err);
         res.locals.Users =  users;
     });
-    User.find({ id: req.session.id_user }, 1, function (err, user) {
+    User.find({ username: req.session.id_user }, 1, function (err, user) {
         if (err) return next(err);
 
         // все что допступно в res.local - доступно всем шаблонам
 
         req.user = res.locals.user = user[0];
+
         next();
     });
 };

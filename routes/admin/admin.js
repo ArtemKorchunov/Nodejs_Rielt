@@ -1,5 +1,5 @@
 exports.get = function(req, res, next) {
-    res.render('admin');
+    res.render('index');
 };
 exports.post = function (req, res, next) {
     var username = req.body.username;
