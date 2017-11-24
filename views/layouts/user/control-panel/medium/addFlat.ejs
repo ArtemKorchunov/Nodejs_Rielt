@@ -1,0 +1,42 @@
+<% layout('../../../page')%>
+<% stylesheet('/css/admin.css') %>
+<div class="container-fluid">
+    <div class="row">
+        <%-partial('../../../../partials/leftNav')%>
+        <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>
+                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModalLong">
+                                Add
+                            </button>
+                        </th>
+                        <% addFlat.forEach(function (value) {%>
+                        <th>
+                            <%-value%>
+                        </th>
+                        <% }) %>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                        </div>
+                        <div class="modal-body">
+                            <%-body -%>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>

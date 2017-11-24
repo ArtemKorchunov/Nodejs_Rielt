@@ -3,11 +3,11 @@
     <ul class="nav nav-pills flex-column">
         <% if (user.right_level >= 5) {%>
         <li class="nav-item">
-            <a class="nav-link" href="/admin/control-panel/add-user">Add user<span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="/admin/control-panel/add-user">Add user<span class="sr-only" >(current)</span></a>
         </li>
         <% } else { %>
         <li class="nav-item">
-            <a class="nav-link active" href="/user/control-panel/add-flat">Overview <span class="sr-only">(current)</span></a>
+            <a class="nav-link active" href="/user/control-panel/add-flat">Add flat <span class="sr-only fa fa-plus" aria-hidden="true">(current)</span></a>
         </li>
         <% } %>
     </ul>

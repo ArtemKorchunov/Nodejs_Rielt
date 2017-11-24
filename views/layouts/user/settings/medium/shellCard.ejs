@@ -1,0 +1,24 @@
+<% layout('../../../page')%>
+<% stylesheet('/css/admin.css') %>
+<div class="card text-center">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+                <a class="nav-link" href="/user/settings/change-profile">Change profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/user/settings/profile">Profile</a>
+            </li>
+        </ul>
+    </div>
+    <div class="card-block">
+        <%-body -%>
+    </div>
+</div>
+<script>
+(function () {
+    var e = document.location.pathname;
+    var d = $("a[href='" + e + "']");
+    d.addClass('active');
+})()
+</script>

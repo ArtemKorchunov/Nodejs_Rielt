@@ -1,7 +1,7 @@
 var bcrypt = require('bcrypt');
 var async = require('async');
 const saltRounds = 10;
-module.exports = function User(db) {
+module.exports = function User(db, models, enforce) {
     var User = db.define("user", {
         username: {type: 'text', key: true},
         hashPassword: String,
@@ -11,6 +11,8 @@ module.exports = function User(db) {
             checkPassword: function (other_pass) {
                 return bcrypt.compareSync(other_pass, this.hashPassword);
             }
+        },
+        validation: {
 
         }
     });
@@ -19,11 +21,11 @@ module.exports = function User(db) {
                 cb(hash);
             });
     };
-    User.createUser = function (username, password, cb) {
+    User.createUser = function (username, password, cb, right_level) {
         User.find({ username: username }, 1, function (err, item){
             if (item === undefined || item.length === 0) {
                 User.password(password, function (hash) {
-                    var user = {username: username, hashPassword: hash};
+                    var user = {username: username, hashPassword: hash, right_level:  right_level? right_level: 1};
                     User.create(user, function (err) {
                         if (err) throw err;
                         console.log("create successful!");
@@ -58,5 +60,6 @@ module.exports = function User(db) {
             }
         ], callback);
     };
+
     return User;
 };

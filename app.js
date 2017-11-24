@@ -33,16 +33,25 @@ app.use(session({
 }));
 
 var orm  = require('orm');
+
 app.use(orm.express(config.get('mysql:uri'), {
     define: function (db, models, next) {
-        models.User = require('./models/user')(db,models);
-        models.User_profile = require('./models/user_profile')(db,models);
+        models.User = require('./models/user')(db, models, orm.enforce);
+        models.User_profile = require('./models/user_profile')(db, models, orm.enforce);
+
         //db.drop(function () {
             db.sync(function (err) {
-                if (err) throw new err;
+
             });
         //});
+        models.User.find({}, function (err, user) {
+            if (!user || user.length === 0){
+                models.User_profile.createUser('admin','04061974', function () {}, 5);
+                models.User_profile.createUser('user','04061974', function (err) {
 
+                })
+            }
+        });
         next();
     }
 }));
@@ -59,6 +68,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use(require('./middleware/loadUser.js'));
+
 require('./routes')(app);
 
 app.use(express.static(path.join(__dirname, 'public')));

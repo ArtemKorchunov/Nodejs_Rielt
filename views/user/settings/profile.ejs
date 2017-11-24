@@ -1,0 +1,23 @@
+<% layout('../../layouts/user/settings/medium/shellCard')%>
+<h4 class="card-title">Profile</h4>
+<div class="" style="max-width: 300px; margin: 0 auto;">
+    <div class="card">
+        <ul class="list-group list-group-flush">
+            <!--todo make this look more readable-->
+            <!--todo make normal date parser!-->
+            <% for (var key in user_profile) {%>
+            <%if (key !== "user_username") {%>
+                <li class="list-group-item">
+                    <% if (key === 'date_of_birth') {%>
+                        <%= "Birthday: " +  user_profile.date_convert(user_profile[key]) %>
+                    <% } else if (!user_profile[key]){ %>
+                        <%= key + ": " + "empty"%>
+                    <% } else {%>
+                        <%= key + ": " + user_profile[key]%>
+                    <% } %>
+                </li>
+            <% } %>
+            <% } %>
+        </ul>
+    </div>
+</div>
