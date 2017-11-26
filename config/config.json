@@ -1,17 +1,11 @@
 {
   "port": 3002,
   "mysql": {
-    "uri" : "mysql://root:@127.0.0.1/rielt"
-  },
-  "mongoose": {
-    "uri": "mongodb://127.0.0.1:27017/test",
-    "options": {
-      "server": {
-        "socketOptions": {
-          "keepAlive": 1
-        }
-      }
-    }
+    "username": "root",
+    "password": "",
+    "database": "rielt",
+    "host": "3306",
+    "dialect": "mysql"
   },
   "session": {
     "secret": "KillerIsJim",
@@ -22,5 +16,4 @@
       "maxAge": 1209600000
     }
   }
-
 }

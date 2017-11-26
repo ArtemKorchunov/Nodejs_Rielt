@@ -30,10 +30,10 @@
                 200: function(success) {
                     form.html("Вы вошли в сайт").addClass('alert-success');
                     if (success.admin) {
-                        window.location.href = "/admin/control-panel";
+                        window.location.href = "/admin/control-panel/add-user";
                     }
                     else {
-                        window.location.href = "/user/control-panel";
+                        window.location.href = "/user/control-panel/add-flat";
                     }
                 },
                 403: function(jqXHR) {

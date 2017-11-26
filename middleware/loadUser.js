@@ -1,24 +1,25 @@
+var models  = require('../models');
+let Sequelize = require("sequelize");
+const Op = Sequelize.Op;
+
 module.exports = function(req, res, next) {
     req.user = res.locals.user = null;
     req.user_profile = res.locals.user_profile = null;
-    var User = req.models.User;
-    var Profile = req.models.User_profile;
+    var User = models.User;
+    var Profile = models.Profile;
     if (!req.session.id_user) return next();
-    User.find({ right_level: 1 }, function (err, users) {
-        if (err) return next(err);
-
-        res.locals.Users =  users;
+    User.findAll({
+        where: {
+            right_level: 1
+        }
+    }).then(users => {
+        res.locals.User =  users;
     });
-    User.find({username: req.session.id_user}, 1 , function (err, user) {
-        if (err) return next(err);
-
-        req.user = res.locals.user = user[0];
-
+    User.findById(req.session.id_user).then(user => {
+        req.user = res.locals.user = user;
     });
-    Profile.find({ user_username: req.session.id_user }, 1, function (err, user_profile) {
-        if (err) return next(err);
-
-        req.user_profile = res.locals.user_profile = user_profile[0];
+    Profile.findOne({ where: {user_username: req.session.id_user}}).then(profile => {
+        req.user_profile = res.locals.user_profile = profile;
         next();
     });
 };

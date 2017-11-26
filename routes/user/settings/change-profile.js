@@ -1,3 +1,5 @@
+var models = require('../../../models');
+
 exports.get = function(req, res, next) {
     if (req.url === "/user/settings" || req.url === "/user/settings/") {
         res.redirect("/user/settings/change-profile");
@@ -7,7 +9,7 @@ exports.get = function(req, res, next) {
     }
 };
 exports.post = function (req, res, next) {
-    var Profile = req.models.User_profile;
+    var Profile = models.Profile.build();
     var current_user = req.user;
     Profile.createUserProfile(req.body.validate_obj,current_user, function (err, profile) {
         if (profile === undefined) {

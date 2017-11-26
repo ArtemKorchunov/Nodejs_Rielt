@@ -1,52 +1,66 @@
-module.exports = function User_profile(db, models, enforce) {
-    var User_profile = models.User.extendsTo("profile", {
-        //username: {type: 'text',unique: true, key: true},
-        name: {type:'text', size: 10},
-        surname: {type:'text', size: 10},
-        date_of_birth: {type:'date'},
-        male : {type: "enum", values: ["M","F"]},
-        work_location: {type:'text', size: 20},
-        pc_from_deal: Number //todo don't see type="number"
+module.exports = (sequelize, Datatypes) => {
+    let User_profile = sequelize.define("Profile", {
+        id_profile: {
+            type: Datatypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true
+        },
+        name: {
+            type: Datatypes.STRING
+        },
+        surname: {
+            type: Datatypes.STRING
+        },
+        date_of_birth: {
+            type: Datatypes.DATE
+        },
+        male: {
+            type: Datatypes.STRING(10)
+        },
+        work_location: {
+            type: Datatypes.STRING
+        },
+        pc_from_deal: {
+            type: Datatypes.FLOAT(10)
+        }
     }, {
-        methods : {
-                date_convert: function(date) {
-                    return date.getDay() + "." + date.getMonth() + "." + date.getFullYear();
-                }
+        classMethods: {
+            date_convert : function (date) {
+                return date.getDay() + "." + date.getMonth() + "." + date.getFullYear();
+            }
+        },
+        instanceMethods: {
+            createUserProfile: (profile, user, cb) => {
+                let username = user.username;
+                User_profile.findOne({user_username: username}).then(item => {
+                    if (!item || item.length === 0) {
+                        User_profile.create(profile).then(
+                            user_profile => {
+                                console.log("profile was created!");
+                                user.setProfile(user_profile);
+                                cb(null, user_profile);
+                            },
+                            err => {
+                                cb(null);
+                            }
+                        );
+                    }
+                    else {
+                        item.update(profile).then(
+                            item => {
+                                cb(null, item);
+                            },
+                            err => {
+                                cb(null);
+                            }//data
+                        )
+                    }
+
+
+                });
             }
         }
-    );
-    User_profile.createUserProfile = function (profile,user, cb) {
-        var username = user.username;
-        User_profile.find({ user_username: username }, 1, function (err, item){
-            if (item === undefined || item.length === 0) {
-                User_profile.create(profile, function (err, user_profile) {
-                    if (err) throw err;
-                    //console.log("profile was created!");
-                    user_profile.setUser(user, function () {});
-                    cb(null,user_profile);
-                });
-            }
-            else {
-                User_profile.get(username, function (err, user_profile) {
-                    for (var key in profile){
-                        user_profile[key] = profile[key];
-                    }
-                    user_profile.save(function (err) {
-                        if (err) {
-                            var err = new Error('Somth went wrong with updating profile');
-                            err.status = 401;
-                            cb(err);
-                        }
-                    });
-                    // user_profile.getUser(function (err, user) {
-                    //     var d = arguments;
-                    // });
-                    //console.log("profile was changed!");
-                    cb(null,user_profile);
-                });
-            }
+    });
 
-        });
-    };
     return User_profile;
 };

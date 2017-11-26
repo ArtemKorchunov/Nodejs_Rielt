@@ -5,19 +5,11 @@
         <ul class="list-group list-group-flush">
             <!--todo make this look more readable-->
             <!--todo make normal date parser!-->
-            <% for (var key in user_profile) {%>
-            <%if (key !== "user_username") {%>
+            <%  for (var val in converted){%>
                 <li class="list-group-item">
-                    <% if (key === 'date_of_birth') {%>
-                        <%= "Birthday: " +  user_profile.date_convert(user_profile[key]) %>
-                    <% } else if (!user_profile[key]){ %>
-                        <%= key + ": " + "empty"%>
-                    <% } else {%>
-                        <%= key + ": " + user_profile[key]%>
-                    <% } %>
+                    <%= converted[val]%>
                 </li>
-            <% } %>
-            <% } %>
+            <% }%>
         </ul>
     </div>
 </div>

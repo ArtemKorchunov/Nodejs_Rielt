@@ -32,31 +32,6 @@ app.use(session({
     key: "sid"
 }));
 
-var orm  = require('orm');
-
-app.use(orm.express(config.get('mysql:uri'), {
-    define: function (db, models, next) {
-        models.User = require('./models/user')(db, models, orm.enforce);
-        models.User_profile = require('./models/user_profile')(db, models, orm.enforce);
-
-        //db.drop(function () {
-            db.sync(function (err) {
-
-            });
-        //});
-        models.User.find({}, function (err, user) {
-            if (!user || user.length === 0){
-                models.User_profile.createUser('admin','04061974', function () {}, 5);
-                models.User_profile.createUser('user','04061974', function (err) {
-
-                })
-            }
-        });
-        next();
-    }
-}));
-
-
 app.engine('ejs', require('ejs-locals'));
 app.set('views', path.join(__dirname,'/views'));
 app.set('view engine', 'ejs');
@@ -66,6 +41,8 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.set('models', require('./models'));
 
 app.use(require('./middleware/loadUser.js'));
 
@@ -77,7 +54,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+  let err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
