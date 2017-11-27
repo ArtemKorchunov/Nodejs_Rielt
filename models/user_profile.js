@@ -1,6 +1,6 @@
 module.exports = (sequelize, Datatypes) => {
     let User_profile = sequelize.define("Profile", {
-        id_profile: {
+        profile_id: {
             type: Datatypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
@@ -61,6 +61,11 @@ module.exports = (sequelize, Datatypes) => {
             }
         }
     });
+    User_profile.associate = (models) => {
+        models.Profile.belongsTo(models.User, {foreignKey: { name: "user_username"}});
+        models.Profile.hasMany(models.Soldout, {foreignKey: { name: "profile_id", allowNull: false}});
+        models.Profile.hasMany(models.Rented, {foreignKey: { name: "profile_id", allowNull: false}});
+    };
 
     return User_profile;
 };

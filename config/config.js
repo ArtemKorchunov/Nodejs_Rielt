@@ -15,6 +15,8 @@ module.exports = {
         database: 'rielt',
         host: '127.0.0.1',
         dialect: 'mysql',
+        charset: 'utf8',
+        collate: 'utf8_general_ci',
         operatorsAliases: false
     }
 };

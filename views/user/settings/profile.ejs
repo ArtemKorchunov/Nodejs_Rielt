@@ -6,8 +6,13 @@
             <!--todo make this look more readable-->
             <!--todo make normal date parser!-->
             <%  for (var val in converted){%>
+
                 <li class="list-group-item">
-                    <%= converted[val]%>
+                    <% if (val == "empty") {%>
+                       <%= converted[val] %>  <a class="nav-link p-0" href="/user/settings/change-profile">change it!</a>
+                    <% } else {%>
+                        <%= converted[val]%>
+                    <% }%>
                 </li>
             <% }%>
         </ul>

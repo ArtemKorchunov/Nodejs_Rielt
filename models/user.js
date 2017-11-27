@@ -44,10 +44,10 @@ module.exports = (sequelize, Datatypes) => {
                                     }
                                 );
                             });
-                        }
+                        } else { cb("Username already exist") }
                     },
                     error => {
-                        cb("Username already exist");
+                        cb();
                     }
                 )
             },
@@ -80,7 +80,7 @@ module.exports = (sequelize, Datatypes) => {
         }
     });
     User.associate = (models) => {
-        models.User.hasOne(models.Profile, {foreignKey: "user_username"})
+        models.User.hasOne(models.Profile, {foreignKey: {name: "user_username", allowNull:false }});
     };
 
     return User;

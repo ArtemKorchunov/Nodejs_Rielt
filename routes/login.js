@@ -3,9 +3,6 @@ var config = require('../config');
 var models  = require('../models');
 
 exports.get = function(req, res, next) {
-    if (req.session.id_user){
-        res.redirect('/');
-    }
     models.User.findById('admin').then( user => {
         if (!user || user.length === 0){
             var exampleA =  models.User.build();
@@ -14,8 +11,11 @@ exports.get = function(req, res, next) {
             exampleU.createUser(exampleU,'user','04061974',1 , function (err) {})
         }
     });
-
-    res.render('login', { title: 'Express' });
+    if (req.session.id_user){
+        res.redirect('/');
+    } else {
+        res.render('login', {title: 'Express'});
+    }
 };
 exports.post = function (req, res, next) {
     let username = req.body.username;
