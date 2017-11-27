@@ -41,10 +41,10 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-
+app.use(require('./middleware/loadUser.js'));
 app.set('models', require('./models'));
 
-app.use(require('./middleware/loadUser.js'));
+
 
 require('./routes')(app);
 

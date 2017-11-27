@@ -11,7 +11,7 @@ module.exports = (sequelize, Datatypes) => {
         surname: {
             type: Datatypes.STRING
         },
-        date_of_birth: {
+        birthday: {
             type: Datatypes.DATE
         },
         male: {

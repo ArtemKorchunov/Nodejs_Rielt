@@ -12,7 +12,7 @@ module.exports = (sequelize, Datatypes) => {
     Soldout.associate = (models) => {
         models.Soldout.belongsTo(models.Flat, {foreignKey: {name: "flat_id" }});
         models.Soldout.belongsTo(models.Profile, {foreignKey: {name: "profile_id", allowNull: false}});
-        models.Soldout.belongsTo(models.Customer, {foreignKey: { name: "cust_passportId"}});
+        models.Soldout.belongsTo(models.Customer, {foreignKey: { name: "cust_passportid"}});
     };
     return Soldout;
 };

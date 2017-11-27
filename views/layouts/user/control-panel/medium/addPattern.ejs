@@ -15,12 +15,24 @@
                         </th>
                         <% ColumnName.forEach(function (value) {%>
                         <th>
-                            <%-value%>
+                            <%-value[0]%>
                         </th>
                         <% }) %>
                     </tr>
                     </thead>
                     <tbody>
+                    <% if (Cols) {%>
+                        <% Cols.forEach(function(item){ %>
+                        <tr>
+                            <td></td>
+                            <% for (let key of item.attributes) {%>
+                                <% if (!(key.indexOf('_id') +1) && !(key.indexOf('seller_passportid') +1) &&  key != "createdAt" && key != "updatedAt") {%>
+                                    <td><%= item[key]%></td>
+                                <% }%>
+                            <% } %>
+                        </tr>
+                        <% }); %>
+                    <% } %>
                     </tbody>
                 </table>
             </div>

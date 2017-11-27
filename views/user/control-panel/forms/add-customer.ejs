@@ -1,0 +1,14 @@
+<% layout('../../../layouts/user/control-panel/medium/addPattern')%>
+<form id="req-form">
+    <% ColumnName.forEach(function (value) {%>
+    <div class="form-group row justify-content-center">
+        <label for="recipient-name" class="col-2 col-form-label"><%-value[0]%>: </label>
+        <input type="<%- (value[1]? value[1]: 'text')%>" name="<%-value[0]%>" class="offset-1 offset-sm-0 col-7 form-control" id="recipient-name">
+    </div>
+    <% }) %>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Create seller</button>
+    </div>
+</form>
+<script src="/js/ajax/user/control-panel/add-customer.js"></script>

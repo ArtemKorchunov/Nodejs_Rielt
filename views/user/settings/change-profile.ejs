@@ -11,7 +11,7 @@
         </div>
         <div class="form-group">
             <label for="dateInput">Date of birth</label>
-            <input class="form-control" name="date_of_birth" id="dateInput" type="date" value="2017-08-19">
+            <input class="form-control" name="birthday" id="dateInput" type="date" value="2017-08-19">
         </div>
         <div class="col">
             <div class="p-md-1 row">
@@ -42,37 +42,4 @@
             <button type="submit" class="btn btn-primary">Change your profile</button>
     </form>
 </div>
-
-<script>
-    $('form').attr('id', 'req-form').on('submit', function() {
-        var form = $(this);
-        var d = arguments;
-        $('.error', form).html('');
-        var btn_subm = $(":submit", form)
-        btn_subm.text('Отправляется...');
-        btn_subm.prop('disabled', true);
-        $.ajax({
-            url: "/user/change-profile",
-            method: "POST",
-            data: form.serialize(),
-            complete: function() {
-                btn_subm.prop('disabled', false);
-                btn_subm.text("Change your profile");
-            },
-            statusCode: {
-                200: function(success) {
-                    form.html("Your profile was changed successful!").addClass('alert-success');
-                    document.location.href = "/user/settings/profile";
-                },
-                403: function(jqXHR) {
-                    $('form').attr('id', 'req-form').append(
-                        "<div class=\"alert alert-danger\" role=\"alert\">" +
-                        "This is a danger alert—check it out!" +
-                        "</div>"
-                    );
-                }
-            }
-        });
-        return false;
-    });
-</script>
+<script src="/js/ajax/user/settings/change-profile.js" ></script>

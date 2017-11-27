@@ -12,7 +12,7 @@ module.exports = (sequelize, Datatypes) => {
     Rented.associate = (models) => {
         models.Rented.belongsTo(models.Flat, {foreignKey: {name: "flat_id" ,allowNull: false}});
         models.Rented.belongsTo(models.Profile, {foreignKey: {name: "profile_id" ,allowNull: false}});
-        models.Rented.belongsTo(models.Customer, {foreignKey: { name: "cust_passportId", allowNull: false}});
+        models.Rented.belongsTo(models.Customer, {foreignKey: { name: "cust_passportid", allowNull: false}});
     };
     return Rented;
 };
