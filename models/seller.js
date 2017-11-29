@@ -8,7 +8,7 @@ module.exports = (sequelize, Datatypes) => {
         name: {type: Datatypes.STRING(25)},
         surname: {type: Datatypes.STRING(25)},
         last_name: {type: Datatypes.STRING(25)},
-        birthday: {type: Datatypes.DATE}
+        birthday: {type: Datatypes.DATEONLY}
     }, {
         classMethods: {
             getAll_val : () => {

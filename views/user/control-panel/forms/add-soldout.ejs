@@ -1,11 +1,6 @@
 <% layout('../../../layouts/user/control-panel/medium/addPattern')%>
-<form id="req-form">
-    <% ColumnName.forEach(function (value) {%>
-    <div class="form-group row justify-content-center">
-        <label for="recipient-name" class="col-2 col-form-label"><%-value%>: </label>
-        <input type="text" class="offset-1 offset-sm-0 col-7 form-control" id="recipient-name">
-    </div>
-    <% }) %>
+<form id="req-form" class="universal-form">
+    <%-partial('../../../partials/user/form-item')%>
     <div class="form-group row justify-content-center">
         <label for="recipient-name" class="col-2 col-form-label">Customer: </label>
         <select name="cust passportid" class="offset-1 offset-sm-0 col-7 custom-select " id="owner-select">
@@ -29,12 +24,13 @@
         <select name="profile id" class="offset-1 offset-sm-0 col-7 custom-select " id="owner-select">
             <option value="" selected>Choose agent.</option>
             <% Profiles.forEach(function (profile) {%>
-            <option value="<%= profile.user_username %>" selected><%= profile.name + " " + profile.surname + " " + profile.last_name %></option>
+            <option value="<%= profile.profile_id %>" selected><%= profile.name + " " + profile.surname %></option>
             <% }) %>
         </select>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Create flat</button>
+        <button type="submit" class="btn btn-primary">Create soldout</button>
     </div>
 </form>
+<script src="/js/ajax/user/control-panel/add-soldout.js"></script>

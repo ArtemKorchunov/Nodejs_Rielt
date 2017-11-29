@@ -1,4 +1,4 @@
-$('form#req-form').on('submit', function() {
+$('form#edit-form').on('submit', function() {
     var form = $(this);
     $('.error', form).html('');
     var btn_subm = $(":submit", form);
@@ -6,21 +6,21 @@ $('form#req-form').on('submit', function() {
     btn_subm.prop('disabled', true);
     var r = form.serialize();
     $.ajax({
-        url: "/user/control-panel/add-customer",
+        url: "/user/control-panel/add-seller",
         method: "POST",
         data: form.serialize(),
         complete: function () {
             btn_subm.prop('disabled', false);
-            btn_subm.text("Create customer");
+            btn_subm.text("Change seller");
         },
         statusCode: {
             200: function (success) {
                 $('form').attr('id', 'req-form').append(
                     "<div class=\"alert alert-success\" role=\"alert\">" +
-                    "   This is a success alert—check it out!\n" +
+                    "   Seller has been changed!\n" +
                     "</div>"
                 );
-                window.location.href = "/user/control-panel/add-customer";
+                window.location.href = "/user/control-panel/add-seller";
             },
             403: function (jqXHR) {
                 $('form').attr('id', 'req-form').append(

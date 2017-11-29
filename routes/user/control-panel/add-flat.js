@@ -1,4 +1,3 @@
-var models = require('../../../models');
 exports.get = function(req, res, next) {
     if (req.url === "/user/control-panel" || req.url === "/user/control-panel/"){
         res.redirect("/user/control-panel/add-flat");
@@ -11,6 +10,7 @@ exports.get = function(req, res, next) {
     }
 };
 exports.post = (req, res, next) => {
+    let models  = req.app.get('models');
     if (req.all_filled){
         models.Flat.create(req.validate_obj).then(
             item => {

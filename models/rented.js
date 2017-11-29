@@ -5,8 +5,8 @@ module.exports = (sequelize, Datatypes) => {
             primaryKey: true,
             autoIncrement: true
         },
-        price_for_moth: {type:  Datatypes.INTEGER},
-        term_of_lease: {type: Datatypes.DATE},
+        price_for_month: {type: Datatypes.INTEGER},
+        term_of_lease: {type: Datatypes.DATEONLY},
         full_time: {type: Datatypes.ENUM("1","0")}
     });
     Rented.associate = (models) => {

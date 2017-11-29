@@ -1,4 +1,3 @@
-var models = require('../../../models');
 exports.get = function(req, res, next) {
     res.render('user/control-panel/forms/add-seller',
         {
@@ -7,6 +6,7 @@ exports.get = function(req, res, next) {
     );
 };
 exports.post = (req, res, next) => {
+    let models  = req.app.get('models');
     if (req.all_filled){
         models.Seller.create(req.validate_obj).then(
             item => {

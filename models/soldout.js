@@ -6,7 +6,7 @@ module.exports = (sequelize, Datatypes) => {
             autoIncrement: true
         },
         price_of_realty: { type: Datatypes.FLOAT},
-        term_of_lease: {type: Datatypes.DATE },
+        term_of_lease: {type: Datatypes.DATEONLY },
         deposit_money: {type: Datatypes.INTEGER }
     });
     Soldout.associate = (models) => {

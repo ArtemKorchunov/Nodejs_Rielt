@@ -1,9 +1,8 @@
-var models  = require('../../models');
-
 exports.get = function(req, res, next) {
     res.render('index');
 };
 exports.post = function (req, res, next) {
+    let models  = req.app.get('models');
     let username = req.body.username;
     let password = req.body.password;
     let Agent = models.User.build();

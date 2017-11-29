@@ -4,13 +4,14 @@
     <div class="row">
         <%-partial('../../../../partials/leftNav')%>
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
+
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
                     <tr>
                         <th>
-                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModalLong">
-                                Add
+                            <button type="button" id="button-req-form" class="btn btn-success btn-sm" data-toggle="modal" data-target="#ModalLong">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
                             </button>
                         </th>
                         <% ColumnName.forEach(function (value) {%>
@@ -21,26 +22,43 @@
                     </tr>
                     </thead>
                     <tbody>
+                    <% var column_number = 1;%>
                     <% if (Cols) {%>
                         <% Cols.forEach(function(item){ %>
                         <tr>
-                            <td></td>
+                            <td class="row justify-content-md-center justify-content-sm-center justify-content-lg-around">
+                                <form class="form-inline" id="del-form">
+                                    <input type="hidden" name="<%=item.attributes[0]%>" value="<%= item.get(item.attributes[0])%>">
+                                    <input type="hidden" name="table" value="<%=item.Model.name%>">
+                                <button type="submit" class="btn btn-danger btn-sm func-icon">
+                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                </button>
+                                </form>
+                                <form class="form-inline" id="edit-form">
+                                    <input type="hidden" name="<%=item.attributes[0]%>" value="<%= item.get(item.attributes[0])%>">
+                                    <button type="button" id="but-edit-form" class="btn btn-info btn-sm func-icon <%= 'column-'+column_number%>" data-toggle="modal" data-target="#ModalLong">
+                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                    </button>
+                                </form>
+                            </td>
+
                             <% for (let key of item.attributes) {%>
-                                <% if (!(key.indexOf('_id') +1) && !(key.indexOf('seller_passportid') +1) &&  key != "createdAt" && key != "updatedAt") {%>
-                                    <td><%= item[key]%></td>
+                                <% if (!(key.indexOf('_id') +1) && !(key.indexOf('seller_passportid') +1) && !(key.indexOf('cust_passportid') + 1)  &&  key != "createdAt" && key != "updatedAt") {%>
+                                    <td class="column-<%= column_number %>"><%= item[key]%></td>
                                 <% }%>
                             <% } %>
+                            <% column_number++ %>
                         </tr>
                         <% }); %>
                     <% } %>
                     </tbody>
                 </table>
             </div>
-            <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+            <div class="modal fade" id="ModalLong" tabindex="-1" role="dialog" aria-labelledby="ModalLongTitle" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                            <h5 class="modal-title" id="ModalLongTitle">Modal title</h5>
                         </div>
                         <div class="modal-body">
                             <%-body -%>
@@ -52,3 +70,4 @@
         </main>
     </div>
 </div>
+<script src="/js/ajax/user/control-panel/del-column.js"></script>

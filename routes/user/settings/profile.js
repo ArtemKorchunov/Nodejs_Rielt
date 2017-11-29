@@ -1,4 +1,4 @@
-var profile_convert = require('../../../lib/profile_convert');
+let profile_convert = require('../../../lib/profile_convert');
 
 exports.get = function(req, res, next) {
     let converted;

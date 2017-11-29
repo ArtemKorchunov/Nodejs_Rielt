@@ -6,12 +6,12 @@ $('form#req-form').on('submit', function() {
     btn_subm.prop('disabled', true);
     var r = form.serialize();
     $.ajax({
-        url: "/user/control-panel/add-customer",
+        url: "/user/control-panel/add-soldout",
         method: "POST",
         data: form.serialize(),
         complete: function () {
             btn_subm.prop('disabled', false);
-            btn_subm.text("Create customer");
+            btn_subm.text("Create soldout");
         },
         statusCode: {
             200: function (success) {
@@ -20,7 +20,7 @@ $('form#req-form').on('submit', function() {
                     "   This is a success alert—check it out!\n" +
                     "</div>"
                 );
-                window.location.href = "/user/control-panel/add-customer";
+                window.location.href = "/user/control-panel/add-soldout";
             },
             403: function (jqXHR) {
                 $('form').attr('id', 'req-form').append(

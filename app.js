@@ -41,7 +41,8 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(require('./middleware/loadUser.js'));
+
+app.use(require('./middleware/loadFiles/loadUser.js'));
 app.set('models', require('./models'));
 
 

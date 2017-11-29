@@ -1,17 +1,20 @@
-var checkAuthA =  require('../middleware/checkAuthA');
-var checkAuthU = require('../middleware/checkAuthU');
-var ValidateProfile = require('../middleware/ValidateProfile');
-var ValidateObj = require('../middleware/ValidateObj');
-var loadUsers = require('../middleware/loadUsers');
-var loadFlat = require('../middleware/loadFlat');
-var loadSeller = require('../middleware/loadSeller');
-var loadCustomer = require('../middleware/loadCustomer');
-var loadSoldouts = require('../middleware/loadSoldouts');
-var loadProfile = require('../middleware/loadProfile');
+let checkAuthA =  require('../middleware/checlAuth/checkAuthA');
+let checkAuthU = require('../middleware/checlAuth/checkAuthU');
+let ValidateProfile = require('../middleware/Validate/ValidateProfile');
+let ValidateObj = require('../middleware/Validate/ValidateObj');
+let loadUsers = require('../middleware/loadFiles/loadUsers');
+let loadFlats = require('../middleware/loadFiles/loadFlats');
+let loadSellers = require('../middleware/loadFiles/loadSellers');
+let loadCustomers = require('../middleware/loadFiles/loadCustomers');
+let loadSoldouts = require('../middleware/loadFiles/loadSoldouts');
+let loadProfiles = require('../middleware/loadFiles/loadProfiles');
+let loadProfile = require('../middleware/loadFiles/loadProfile');
+let loadRenteds = require('../middleware/loadFiles/loadRenteds');
 
 module.exports = (app) => {
     app.get('/admin*',checkAuthA);
     app.get('/user*',checkAuthU);
+    app.post('/user/control-panel/*',ValidateObj);
 
     app.get('/', require('./main').get);
     app.get('/login', require('./login').get);
@@ -24,26 +27,27 @@ module.exports = (app) => {
     app.get('/user', require('./user/user').get);
 
     app.get('/user/settings(/change-profile)?', require('./user/settings/change-profile').get);
-    app.post('/user/change-profile',ValidateProfile, require('./user/settings/change-profile').post);
-    app.get('/user/settings/profile', require('./user/settings/profile').get);
+    app.post('/user/settings/change-profile',ValidateProfile, require('./user/settings/change-profile').post);
+    app.get('/user/settings/profile',loadProfile, require('./user/settings/profile').get);
 
-    app.get('/user/control-panel(/add-flat)?',loadFlat,loadSeller, require('./user/control-panel/add-flat').get);
-    app.post('/user/control-panel/add-flat',ValidateObj, require('./user/control-panel/add-flat').post);
+    app.get('/user/control-panel(/add-flat)?',loadFlats,loadSellers, require('./user/control-panel/add-flat').get);
+    app.post('/user/control-panel/add-flat', require('./user/control-panel/add-flat').post);
 
-    app.get('/user/control-panel/add-seller',loadSeller, require('./user/control-panel/add-seller').get);
-    app.post('/user/control-panel/add-seller',ValidateObj, require('./user/control-panel/add-seller').post);
+    app.get('/user/control-panel/add-seller',loadSellers, require('./user/control-panel/add-seller').get);
+    app.post('/user/control-panel/add-seller', require('./user/control-panel/add-seller').post);
 
-    app.get('/user/control-panel/add-customer',loadCustomer, require('./user/control-panel/add-customer').get);
-    app.post('/user/control-panel/add-customer',ValidateObj, require('./user/control-panel/add-customer').post);
+    app.get('/user/control-panel/add-customer',loadCustomers, require('./user/control-panel/add-customer').get);
+    app.post('/user/control-panel/add-customer', require('./user/control-panel/add-customer').post);
 
-    app.get('/user/control-panel/add-rented', require('./user/control-panel/add-rented').get);
+    app.get('/user/control-panel/add-rented',loadRenteds, loadCustomers,loadFlats,loadProfiles, require('./user/control-panel/add-rented').get);
+    app.post('/user/control-panel/add-rented', require('./user/control-panel/add-rented').post);
 
-
-    app.get('/user/control-panel/add-soldout',loadSoldouts, loadCustomer,loadFlat,loadProfile, require('./user/control-panel/add-soldout').get);
+    app.get('/user/control-panel/add-soldout',loadSoldouts, loadCustomers,loadFlats,loadProfiles, require('./user/control-panel/add-soldout').get);
     app.post('/user/control-panel/add-soldout', require('./user/control-panel/add-soldout').post);
 
     app.get('/logout', require('./logout').get);
 
 
+    app.post('/delete/column', require('./user/actions/delete-column').post)
 };
 

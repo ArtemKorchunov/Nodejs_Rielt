@@ -1,4 +1,4 @@
-$('form').attr('id', 'req-form').on('submit', function() {
+$('form#req-form').on('submit', function() {
     var form = $(this);
     $('.error', form).html('');
     var btn_subm = $(":submit", form);

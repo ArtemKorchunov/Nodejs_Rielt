@@ -19,8 +19,21 @@
     <%-partial('../partials/topNav')%>
     <%-body -%>
     <script>
-        $('#exampleModalLong').on('hidden.bs.modal', function (e) {
+        $('#ModalLong').on('hidden.bs.modal', function (e) {
+            var d = arguments;
         })
+        $('#ModalLong').on('show.bs.modal', function (e) {
+            var from_button = e.relatedTarget.id;
+            if (from_button.indexOf('edit-form') + 1){
+                $('.universal-form').attr('id','edit-form');
+                $('#universal-submit').html('Change ...')
+            }
+            else if (from_button.indexOf('req-form') + 1){
+                $('.universal-form').attr('id','req-form');
+                $('#universal-submit').html('Create ...')
+            }
+        })
+
     </script>
 </body>
 </html>

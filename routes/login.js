@@ -1,8 +1,7 @@
-var orm  = require('orm');
 var config = require('../config');
-var models  = require('../models');
 
 exports.get = function(req, res, next) {
+    let models  = req.app.get('models');
     models.User.findById('admin').then( user => {
         if (!user || user.length === 0){
             var exampleA =  models.User.build();
@@ -18,6 +17,7 @@ exports.get = function(req, res, next) {
     }
 };
 exports.post = function (req, res, next) {
+    let models  = req.app.get('models');
     let username = req.body.username;
     let password = req.body.password;
     let User = models.User.build();

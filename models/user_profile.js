@@ -12,7 +12,7 @@ module.exports = (sequelize, Datatypes) => {
             type: Datatypes.STRING
         },
         birthday: {
-            type: Datatypes.DATE
+            type: Datatypes.DATEONLY
         },
         male: {
             type: Datatypes.STRING(10)
@@ -26,7 +26,8 @@ module.exports = (sequelize, Datatypes) => {
     }, {
         classMethods: {
             date_convert : function (date) {
-                return date.getDay() + "." + date.getMonth() + "." + date.getFullYear();
+                date = new Date(date);
+                return date.getDate() + "." + (date.getMonth() + 1) + "." + date.getFullYear();
             }
         },
         instanceMethods: {

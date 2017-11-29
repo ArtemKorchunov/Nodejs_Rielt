@@ -6,7 +6,7 @@ $('form').attr('id', 'req-form').on('submit', function() {
     btn_subm.text('Отправляется...');
     btn_subm.prop('disabled', true);
     $.ajax({
-        url: "/user/change-profile",
+        url: "/user/settings/change-profile",
         method: "POST",
         data: form.serialize(),
         complete: function() {

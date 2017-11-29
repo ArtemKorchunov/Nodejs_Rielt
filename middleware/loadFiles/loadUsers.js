@@ -1,6 +1,6 @@
-var models  = require('../models');
 
 module.exports = (req,res,next) => {
+    let models  = req.app.get('models');
     models.User.findAll({
         where: {
             right_level: 1

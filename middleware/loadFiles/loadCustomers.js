@@ -1,7 +1,6 @@
-var models  = require('../models');
 
 module.exports = (req, res, next) => {
-    res.locals.Cols = null;
+    let models  = req.app.get('models');
     models.Customer.findAll({limit: 10}).then(
         items => {
             if(req.url.indexOf('add-soldout') + 1) {
@@ -13,6 +12,10 @@ module.exports = (req, res, next) => {
                 res.locals.Cols = items;
             }
 
+            next();
+        },
+        err => {
+            res.locals.Cols = null;
             next();
         }
     );
