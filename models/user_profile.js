@@ -27,7 +27,11 @@ module.exports = (sequelize, Datatypes) => {
         classMethods: {
             date_convert : function (date) {
                 date = new Date(date);
-                return date.getDate() + "." + (date.getMonth() + 1) + "." + date.getFullYear();
+                let day = date.getDate();
+                day = day > 9 ? day: "0" + day;
+                let month = Number(date.getMonth()) + 1;
+                month = month > 9 ? month: "0" + month;
+                return day + "." + month + "." + date.getFullYear();
             }
         },
         instanceMethods: {

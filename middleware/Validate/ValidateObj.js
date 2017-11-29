@@ -13,10 +13,6 @@ module.exports = function(req, res, next) {
             validate_obj[key] = info[key];
         }
     }
-    if (req['all_filled']) {
-        validate_obj = replace(validate_obj);
-    }
-
     req['validate_obj'] = validate_obj;
     next();
 };

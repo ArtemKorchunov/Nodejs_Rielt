@@ -1,6 +1,6 @@
-let checkAuthA =  require('../middleware/checlAuth/checkAuthA');
-let checkAuthU = require('../middleware/checlAuth/checkAuthU');
-let ValidateProfile = require('../middleware/Validate/ValidateProfile');
+let checkAuthA =  require('../middleware/checkAuth/checkAuthA');
+let checkAuthU = require('../middleware/checkAuth/checkAuthU');
+let ValidateEditForms = require('../middleware/Validate/ValidateEditForms');
 let ValidateObj = require('../middleware/Validate/ValidateObj');
 let loadUsers = require('../middleware/loadFiles/loadUsers');
 let loadFlats = require('../middleware/loadFiles/loadFlats');
@@ -10,11 +10,11 @@ let loadSoldouts = require('../middleware/loadFiles/loadSoldouts');
 let loadProfiles = require('../middleware/loadFiles/loadProfiles');
 let loadProfile = require('../middleware/loadFiles/loadProfile');
 let loadRenteds = require('../middleware/loadFiles/loadRenteds');
-
+let ReplaceMethod = require('../middleware/Validate/Replace-method');
 module.exports = (app) => {
     app.get('/admin*',checkAuthA);
     app.get('/user*',checkAuthU);
-    app.post('/user/control-panel/*',ValidateObj);
+    app.post('/user/control-panel/*',ValidateObj,ReplaceMethod);
 
     app.get('/', require('./main').get);
     app.get('/login', require('./login').get);
@@ -27,7 +27,7 @@ module.exports = (app) => {
     app.get('/user', require('./user/user').get);
 
     app.get('/user/settings(/change-profile)?', require('./user/settings/change-profile').get);
-    app.post('/user/settings/change-profile',ValidateProfile, require('./user/settings/change-profile').post);
+    app.post('/user/settings/change-profile',ValidateEditForms, require('./user/settings/change-profile').post);
     app.get('/user/settings/profile',loadProfile, require('./user/settings/profile').get);
 
     app.get('/user/control-panel(/add-flat)?',loadFlats,loadSellers, require('./user/control-panel/add-flat').get);
@@ -48,6 +48,7 @@ module.exports = (app) => {
     app.get('/logout', require('./logout').get);
 
 
-    app.post('/delete/column', require('./user/actions/delete-column').post)
+    app.post('/delete/column/:table_name', require('./user/actions/delete-column').post);
+    app.post('/edit/column/:table_name/:id_name/:id',ValidateEditForms,ReplaceMethod, require('./user/actions/edit-column').post);
 };
 

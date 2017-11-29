@@ -1,14 +1,19 @@
 module.exports = (sequelize, Datatypes) => {
     var Seller = sequelize.define("Seller", {
-        passportid: {
-            type: Datatypes.STRING(8),
+        seller_id: {
+            type: Datatypes.INTEGER,
             primaryKey: true,
-            allowNull: false
+            autoIncrement: true
+        },
+        passportid: {
+            type: Datatypes.STRING(8)
         },
         name: {type: Datatypes.STRING(25)},
         surname: {type: Datatypes.STRING(25)},
         last_name: {type: Datatypes.STRING(25)},
-        birthday: {type: Datatypes.DATEONLY}
+        birthday: {
+            type: Datatypes.DATEONLY
+        }
     }, {
         classMethods: {
             getAll_val : () => {
@@ -33,7 +38,7 @@ module.exports = (sequelize, Datatypes) => {
     });
 
     Seller.associate = (models) => {
-        models.Seller.hasMany(models.Flat, {foreignKey: {name: "seller_passportid"}})
+        models.Seller.hasMany(models.Flat, {foreignKey: {name: "seller_id"}})
     };
     return Seller;
 };

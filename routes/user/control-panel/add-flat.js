@@ -4,7 +4,9 @@ exports.get = function(req, res, next) {
     } else {
         res.render('user/control-panel/forms/add-flat',
             {
-                ColumnName: [['City'], ['Street'], ['Flat'], ['Room amount','number'], ['Stage','number'], ['Total_floors','number'], ['Size','number']]
+                ColumnName: [['City'], ['Street'], ['Flat'], ['Room amount','number'], ['Stage','number'], ['Total_floors','number'], ['Size','number']],
+                tableName: req.tableName
+
             }
         );
     }
@@ -14,14 +16,13 @@ exports.post = (req, res, next) => {
     if (req.all_filled){
         models.Flat.create(req.validate_obj).then(
             item => {
-
-                res.send({});
+                res.send({message:"Flat has been created successful!" ,redir_to: "add-flat"});
             },
             err => {
-                res.status(403).send('All fields must be completed!');
+                res.status(403).send({message: 'All fields must be completed!'});
             }
         )
     } else {
-        res.status(403).send('All fields must be completed!');
+        res.status(403).send({message: 'All fields must be completed!'});
     }
 };

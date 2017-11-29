@@ -1,7 +1,8 @@
 exports.get = function(req, res, next) {
     res.render('user/control-panel/forms/add-soldout',
         {
-            ColumnName: [['Price of realty','number'],['Term of lease', 'date'],['Deposit money','number']]
+            ColumnName: [['Price of realty','number'],['Term of lease', 'date'],['Deposit money','number']],
+            tableName: req.tableName
         }
     );
 };
@@ -10,13 +11,13 @@ exports.post = (req, res, next) => {
     if (req.all_filled){
         models.Soldout.create(req.validate_obj).then(
             item => {
-                res.send({});
+                res.send({message:"Soldout has been created successful!" ,redir_to: "add-soldout"});
             },
             err => {
-                res.status(403).send('All fields must be completed!');
+                res.status(403).send({message: 'All fields must be completed!'});
             }
         )
     } else {
-        res.status(403).send('All fields must be completed!');
+        res.status(403).send({message: 'All fields must be completed!'});
     }
 };

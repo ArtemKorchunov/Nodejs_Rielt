@@ -1,7 +1,8 @@
 exports.get = (req, res, next) => {
     res.render('user/control-panel/forms/add-rented',
         {
-            ColumnName: [['Price for month'],['Term of lease'],['Full time']]
+            ColumnName: [['Price for month'],['Term of rented'],['Full time']],
+            tableName: req.tableName
         }
     );
 };
@@ -10,13 +11,13 @@ exports.post = (req, res, next) => {
     if (req.all_filled){
         models.Rented.create(req.validate_obj).then(
             item => {
-                res.send({text: "Rented "});
+                res.send({message:"Rented has been created successful!" ,redir_to: "add-rented"});
             },
             err => {
-                res.status(403).send('All fields must be completed!');
+                res.status(403).send({message: 'All fields must be completed!'});
             }
         )
     } else {
-        res.status(403).send('All fields must be completed!');
+        res.status(403).send({message: 'All fields must be completed!'});
     }
 };

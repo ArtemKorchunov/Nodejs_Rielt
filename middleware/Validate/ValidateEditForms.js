@@ -8,7 +8,7 @@ module.exports = function(req, res, next) {
             validate_obj[key] = info[key];
         }
     }
-    validate_obj['user_username'] = req.user.username;
+    req['notall_filled'] = true;
     req.body['validate_obj'] = validate_obj;
     next();
 };

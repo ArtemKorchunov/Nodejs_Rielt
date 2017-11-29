@@ -1,5 +1,6 @@
 <% layout('../../../layouts/user/control-panel/medium/addPattern')%>
 <form id="req-form" class="universal-form">
+    <input type="hidden" id="hidden-input-in-form">
     <div class="form-group row justify-content-center">
         <label for="recipient-name" class="col-2 col-form-label">Price per month: </label>
         <input type="number" name="price for month" class="offset-1 offset-sm-0 col-7 form-control" id="recipient-name">
@@ -7,12 +8,12 @@
     <div class="form-group col">
         <div class="form-group row justify-content-center">
             <label class="custom-control custom-radio">
-                <input id="radio1" name="full time" value="1" type="radio" class="custom-control-input" checked>
+                <input id="radio1" name="full time" value="1" type="radio" class="custom-control-input form-control" checked>
                 <span class="custom-control-indicator"></span>
                 <span class="custom-control-description">Full time</span>
             </label>
             <label class="custom-control custom-radio">
-                <input id="radio2" name="full time" value="0" type="radio" class="custom-control-input">
+                <input id="radio2" name="full time" value="0" type="radio" class="custom-control-input form-control">
                 <span class="custom-control-indicator"></span>
                 <span class="custom-control-description">Part time</span>
             </label>
@@ -20,38 +21,38 @@
     </div>
     <div class="form-group row justify-content-center">
         <label for="recipient-name" class="col-2 col-form-label">Term: </label>
-        <input type="date" name="term of lease" class="offset-1 offset-sm-0 col-7 form-control" id="recipient-name">
+        <input type="date" name="term of rented" class="offset-1 offset-sm-0 col-7 form-control" id="recipient-name">
     </div>
     <div class="form-group row justify-content-center">
         <label for="recipient-name" class="col-2 col-form-label">Customer: </label>
-        <select name="cust passportid" class="offset-1 offset-sm-0 col-7 custom-select " id="owner-select">
+        <select name="cust id" class="offset-1 offset-sm-0 col-7 custom-select form-control" id="owner-select">
             <option value="" selected>Choose customer.</option>
             <% Customers.forEach(function (customer) {%>
-            <option value="<%= customer.passportid %>" selected><%= customer.name + " " + customer.surname + " " + customer.last_name %></option>
+            <option value="<%= customer.cust_id %>"><%= customer.name + " " + customer.surname + " " + customer.last_name %></option>
             <% }) %>
         </select>
     </div>
     <div class="form-group row justify-content-center">
         <label for="recipient-name" class="col-2 col-form-label">Flat: </label>
-        <select name="flat id" class="offset-1 offset-sm-0 col-7 custom-select " id="owner-select">
+        <select name="flat id" class="offset-1 offset-sm-0 col-7 custom-select form-control" id="owner-select">
             <option value="" selected>Choose flat.</option>
             <% Flats.forEach(function (flat) {%>
-            <option value="<%= flat.flat_id %>" selected><%= 'City:' + flat.city + ", Street:" + flat.street + ", Flat:" + flat.flat %></option>
+            <option value="<%= flat.flat_id %>"><%= 'City:' + flat.city + ", Street:" + flat.street + ", Flat:" + flat.flat %></option>
             <% }) %>
         </select>
     </div>
     <div class="form-group row justify-content-center">
         <label for="recipient-name" class="col-2 col-form-label">Agent: </label>
-        <select name="profile id" class="offset-1 offset-sm-0 col-7 custom-select " id="owner-select">
+        <select name="profile id" class="offset-1 offset-sm-0 col-7 custom-select form-control" id="owner-select">
             <option value="" selected>Choose agent.</option>
             <% Profiles.forEach(function (profile) {%>
-            <option value="<%= profile.profile_id %>" selected><%= profile.name + " " + profile.surname %></option>
+            <option value="<%= profile.profile_id %>"><%= profile.name + " " + profile.surname %></option>
             <% }) %>
         </select>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Create flat</button>
+        <button type="submit" class="btn btn-primary" id="universal-submit">Create flat</button>
     </div>
 </form>
 <script>
@@ -65,4 +66,4 @@
     });
     $("input[type=date]").attr("disabled", true);
 </script>
-<script src="/js/ajax/user/control-panel/add-rented.js"></script>
+<script src="/js/ajax/user/control-panel/add-universal.js"></script>

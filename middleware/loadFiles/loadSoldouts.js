@@ -1,8 +1,11 @@
+var dateConvert = require("../../lib/dateConvert");
 module.exports = (req, res, next) => {
     let models  = req.app.get('models');
-    models.Soldout.findAll({limit: 10}).then(
+    let this_model = models.Soldout;
+    this_model.findAll({limit: 10}).then(
         items => {
-            res.locals.Cols = items;
+            req.tableName = this_model.name;
+            res.locals.Cols = dateConvert(items);
             next();
         },
         err => {

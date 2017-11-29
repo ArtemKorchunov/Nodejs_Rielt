@@ -1,7 +1,8 @@
-
+var dateConvert = require("../../lib/dateConvert");
 module.exports = (req, res, next) => {
     let models  = req.app.get('models');
-    models.Customer.findAll({limit: 10}).then(
+    let this_model = models.Customer;
+    this_model.findAll({limit: 10}).then(
         items => {
             if(req.url.indexOf('add-soldout') + 1) {
                 res.locals.Customers = items;
@@ -9,7 +10,8 @@ module.exports = (req, res, next) => {
                 res.locals.Customers = items;
             }
             else {
-                res.locals.Cols = items;
+                req.tableName = this_model.name;
+                res.locals.Cols = dateConvert(items);
             }
 
             next();

@@ -1,9 +1,10 @@
 <% layout('../../../layouts/user/control-panel/medium/addPattern')%>
 <form id="req-form" class="universal-form">
+    <input type="hidden" id="hidden-input-in-form">
     <%-partial('../../../partials/user/form-item')%>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Create soldout</button>
+        <button type="submit" class="btn btn-primary" id="universal-submit">Create soldout</button>
     </div>
 </form>
-<script src="/js/ajax/user/control-panel/add-customer.js"></script>
+<script src="/js/ajax/user/control-panel/add-universal.js"></script>

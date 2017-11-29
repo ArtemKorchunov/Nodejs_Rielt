@@ -1,7 +1,8 @@
 
 module.exports = (req,res,next) => {
     let models  = req.app.get('models');
-    models.User.findAll({
+    let this_model = models.User;
+    this_model.findAll({
         where: {
             right_level: 1
         }
@@ -14,13 +15,10 @@ module.exports = (req,res,next) => {
                 res.locals.Users = items;
             }
             else {
+                req.tableName = this_model.name;
                 res.locals.Cols = items;
             }
             next();
-        },
-        err => {
-            res.locals.Cols =  [];
-            next()
         }
     );
 

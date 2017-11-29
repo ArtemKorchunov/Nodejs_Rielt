@@ -1,6 +1,7 @@
 module.exports = (req, res, next) => {
     let models  = req.app.get('models');
-    models.Flat.findAll({limit: 20}).then(
+    let this_model = models.Flat;
+    this_model.findAll({limit: 20}).then(
         items => {
             if(req.url.indexOf('add-soldout') + 1) {
                 res.locals.Flats = items;
@@ -8,8 +9,8 @@ module.exports = (req, res, next) => {
                 res.locals.Flats = items;
             }
             else {
+                req.tableName = this_model.name;
                 res.locals.Cols = items;
-                var dsagfdsa= items[0].attributes[0];
             }
             next();
         }

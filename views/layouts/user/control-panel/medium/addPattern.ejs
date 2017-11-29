@@ -6,7 +6,7 @@
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
 
             <div class="table-responsive">
-                <table class="table table-striped">
+                <table class="table table-striped" id="<%= tableName%>">
                     <thead>
                     <tr>
                         <th>
@@ -28,23 +28,23 @@
                         <tr>
                             <td class="row justify-content-md-center justify-content-sm-center justify-content-lg-around">
                                 <form class="form-inline" id="del-form">
-                                    <input type="hidden" name="<%=item.attributes[0]%>" value="<%= item.get(item.attributes[0])%>">
-                                    <input type="hidden" name="table" value="<%=item.Model.name%>">
+                                    <input type="hidden" id="<%= 'column-' + column_number%>" class="this-column-id" name="id" value="<%= item.get(item.attributes[0])%>">
                                 <button type="submit" class="btn btn-danger btn-sm func-icon">
                                     <i class="fa fa-trash-o" aria-hidden="true"></i>
                                 </button>
                                 </form>
-                                <form class="form-inline" id="edit-form">
-                                    <input type="hidden" name="<%=item.attributes[0]%>" value="<%= item.get(item.attributes[0])%>">
-                                    <button type="button" id="but-edit-form" class="btn btn-info btn-sm func-icon <%= 'column-'+column_number%>" data-toggle="modal" data-target="#ModalLong">
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                    </button>
-                                </form>
+                                <button type="button" id="but-edit-form" class="btn btn-info btn-sm func-icon" data-toggle="modal" data-target="#ModalLong">
+                                    <input type="hidden" name="column-number" value="<%= 'column-' + column_number%>">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </button>
                             </td>
-
                             <% for (let key of item.attributes) {%>
-                                <% if (!(key.indexOf('_id') +1) && !(key.indexOf('seller_passportid') +1) && !(key.indexOf('cust_passportid') + 1)  &&  key != "createdAt" && key != "updatedAt") {%>
-                                    <td class="column-<%= column_number %>"><%= item[key]%></td>
+                                <% if (!(key.indexOf('_id') +1) &&  key != "createdAt" && key != "updatedAt") {%>
+                                    <% if (Date.parse(item[key])) {%>
+                                    <td class="column-<%= column_number %> <%= key%>"><%= item[key]%></td>
+                                    <% } else {%>
+                                    <td class="column-<%= column_number %> <%= key%>"><%= item[key]%></td>
+                                    <% }%>
                                 <% }%>
                             <% } %>
                             <% column_number++ %>

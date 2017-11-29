@@ -7,6 +7,7 @@ exports.get = function(req, res, next) {
     }
 };
 exports.post = function (req, res, next) {
+    req.body.validate_obj['user_username'] = req.user.username;
     let models  = req.app.get('models');
     var Profile = models.Profile.build();
     var current_user = req.user;
