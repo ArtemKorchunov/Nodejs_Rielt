@@ -3,7 +3,8 @@ module.exports = (sequelize, Datatypes) => {
         seller_id: {
             type: Datatypes.INTEGER,
             primaryKey: true,
-            autoIncrement: true
+            autoIncrement: true,
+            allowNull: false
         },
         passportid: {
             type: Datatypes.STRING(8)
@@ -38,7 +39,7 @@ module.exports = (sequelize, Datatypes) => {
     });
 
     Seller.associate = (models) => {
-        models.Seller.hasMany(models.Flat, {foreignKey: {name: "seller_id"}})
+        models.Seller.hasMany(models.Flat, {foreignKey: {name: "seller_id", allowNull:false}});
     };
     return Seller;
 };

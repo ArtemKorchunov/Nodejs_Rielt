@@ -30,7 +30,7 @@
             table_name = table_name.toLowerCase();
             if (from_button.id.indexOf('edit-form') + 1){
                 $('#universal-submit').html('Change ' + table_name);
-                $('.table').addClass('edit').removeClass('add');
+                $('.table').addClass('edit').removeClass('add').removeClass('search');
                 var column_number = $(from_button.children[0]).val();
                 $("#hidden-input-in-form").val(column_number);
                 var this_columns = $("." + column_number);
@@ -52,11 +52,16 @@
             }
             else if (from_button.id.indexOf('req-form') + 1){
                 $('#universal-submit').html('Create  ' + table_name)
-                $('.table').addClass('add').removeClass('edit');
+                $('.table').addClass('add').removeClass('edit').removeClass('search');;
+                form_inputs.not("input[type=radio]").val('');
+            }
+            else if(from_button.id.indexOf('search-form') + 1){
+                $('#universal-submit').html('Search  ' + table_name)
+                $('.table').addClass('search').removeClass('edit').removeClass('add');
                 form_inputs.not("input[type=radio]").val('');
             }
             $('#radio1').val("1");
-            $('#radio1').val("0");
+            $('#radio2').val("0");
         })
 
     </script>

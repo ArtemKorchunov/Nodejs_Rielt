@@ -9,9 +9,12 @@
                 <table class="table table-striped" id="<%= tableName%>">
                     <thead>
                     <tr>
-                        <th>
+                        <th class="row justify-content-center">
                             <button type="button" id="button-req-form" class="btn btn-success btn-sm" data-toggle="modal" data-target="#ModalLong">
                                 <i class="fa fa-plus" aria-hidden="true"></i>
+                            </button>
+                            <button type="button" id="button-search-form" class="btn btn-success btn-sm" data-toggle="modal" data-target="#ModalLong">
+                                <i class="fa fa-search" aria-hidden="true"></i>
                             </button>
                         </th>
                         <% ColumnName.forEach(function (value) {%>
@@ -26,9 +29,9 @@
                     <% if (Cols) {%>
                         <% Cols.forEach(function(item){ %>
                         <tr>
-                            <td class="row justify-content-md-center justify-content-sm-center justify-content-lg-around">
+                            <td class="row justify-content-center">
                                 <form class="form-inline" id="del-form">
-                                    <input type="hidden" id="<%= 'column-' + column_number%>" class="this-column-id" name="id" value="<%= item.get(item.attributes[0])%>">
+                                    <input type="hidden" id="<%= 'column-' + column_number%>" class="this-column-id" name="id" value="<%= item._id%>">
                                 <button type="submit" class="btn btn-danger btn-sm func-icon">
                                     <i class="fa fa-trash-o" aria-hidden="true"></i>
                                 </button>
@@ -38,7 +41,7 @@
                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                 </button>
                             </td>
-                            <% for (let key of item.attributes) {%>
+                            <% for (let key in item) {%>
                                 <% if (!(key.indexOf('_id') +1) &&  key != "createdAt" && key != "updatedAt") {%>
                                     <% if (Date.parse(item[key])) {%>
                                     <td class="column-<%= column_number %> <%= key%>"><%= item[key]%></td>

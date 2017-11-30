@@ -30,7 +30,17 @@ Object.keys(db).forEach(modelName => {
     }
 });
 
-sequelize.sync({force:false});
+sequelize.sync({
+    force:false,
+    logging: console.log
+}).then(function generate() {
+
+    // db.Customer.create('1','MT564587','Nikita','Chernenko','Vadimovich','01.01.1945');
+    // db.Seller.create('1','MT565477','Ilia','Sakovich','Vadimovich','01.01.1995');
+    // db.Flat.create('1','Xarkov','Pushkin','225B','4','5','9','40','1', {
+    //     fields:['flat_id','city','street','flat','room_amount','stage','total_floors','size','seller_id']
+    // });
+});
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

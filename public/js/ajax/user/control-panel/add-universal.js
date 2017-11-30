@@ -13,7 +13,9 @@ $('form#req-form').on('submit', function() {
         var table_name_id = "/"+ id_name + "/" + id_value;
         url += table_name_id;
     } else if (tableName.hasClass('add')) {
-        url = '/user/control-panel/add-' +  table_id.toLowerCase();;
+        url = '/user/control-panel/add-' +  table_id.toLowerCase();
+    } else if (tableName.hasClass('search')){
+        url = 'search/'+ table_id.toLowerCase();
     }
     var form = $(this);
     $('.error', form).html('');

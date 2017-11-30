@@ -4,9 +4,8 @@ exports.get = function(req, res, next) {
     } else {
         res.render('user/control-panel/forms/add-flat',
             {
-                ColumnName: [['City'], ['Street'], ['Flat'], ['Room amount','number'], ['Stage','number'], ['Total_floors','number'], ['Size','number']],
+                ColumnName: [['City','text'], ['Street','text'], ['Flat','text'], ['Room amount','number'], ['Stage','number'], ['Total_floors','number'], ['Size','number'],['Seller']],
                 tableName: req.tableName
-
             }
         );
     }

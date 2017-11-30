@@ -1,7 +1,7 @@
 exports.get = function(req, res, next) {
     res.render('user/control-panel/forms/add-customer',
         {
-            ColumnName: [ ['PassportId'],['Name'],['Surname'],['Last name'], ['Birthday','date']],
+            ColumnName: [ ['PassportId','text'],['Name','text'],['Surname','text'],['Last name','text'], ['Birthday','date']],
             tableName: req.tableName
         }
     );

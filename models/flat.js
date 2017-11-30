@@ -14,7 +14,7 @@ module.exports = (sequelize, Datatypes) => {
         size: {type: Datatypes.INTEGER(4)}
     });
     Flat.associate = (models) => {
-        models.Flat.belongsTo(models.Seller, {foreignKey: {name: "seller_id", allowNull: false}});
+        models.Flat.belongsTo(models.Seller, {foreignKey: {name: "seller_id", allowNull:false}, onDelete: 'CASCADE'});
         models.Flat.hasMany(models.Soldout, {foreignKey: {name: "flat_id", allowNull: false}});
         models.Flat.hasMany(models.Rented, {foreignKey: {name: "flat_id", allowNull: false}});
     };

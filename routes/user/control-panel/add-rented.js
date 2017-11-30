@@ -1,7 +1,7 @@
 exports.get = (req, res, next) => {
     res.render('user/control-panel/forms/add-rented',
         {
-            ColumnName: [['Price for month'],['Term of rented'],['Full time']],
+            ColumnName: [['Price for month','text'],['Term of rented','text'],['Full time','text'],['Customer'],['Flat'],['Seller']],
             tableName: req.tableName
         }
     );
