@@ -1,7 +1,6 @@
 $('form#req-form').on('submit', function() {
     var tableName = $(".table");
     var table_id = tableName.attr('id');
-
     var url;
     if (tableName.hasClass('edit')){
         url = '/edit/column/'+ table_id;
@@ -15,7 +14,7 @@ $('form#req-form').on('submit', function() {
     } else if (tableName.hasClass('add')) {
         url = '/user/control-panel/add-' +  table_id.toLowerCase();
     } else if (tableName.hasClass('search')){
-        url = 'search/'+ table_id.toLowerCase();
+        url = '/search/'+ table_id;
     }
     var form = $(this);
     $('.error', form).html('');
@@ -33,12 +32,34 @@ $('form#req-form').on('submit', function() {
         },
         statusCode: {
             200: function (success) {
-                $('form#req-form').append(
-                    "<div class=\"alert alert-success\" role=\"alert\">" +
+                if (success.type === "search"){
+                    var search_items = success.arr;
+                    var d = $('.tbody-info').children();
+                    d.each(function (index, item) {
+                       if (!search_items[item.id]){
+                           item.remove();
+                       }
+                    });
+                    var search_i = $('.fa-search');
+                    search_i.removeClass('fa-search').addClass('fa-refresh');
+                    var button_parent_search_i = search_i.parent();
+                    button_parent_search_i.attr({'data-toggle': '', 'data-target': ''});
+                    button_parent_search_i.click(function () {
+                            var tableName = $(".table");
+                            var table_id = tableName.attr('id');
+                            location.href = '/user/control-panel/add-'  + table_id.toLowerCase();
+                        }
+                    );
+                    $('#ModalLong').modal('hide')
+                }
+                else {
+                    $('form#req-form').append(
+                        "<div class=\"alert alert-success\" role=\"alert\">" +
                         success.message + "\n" +
-                    "</div>"
-                );
-                window.location.href = "/user/control-panel/" + success.redir_to;
+                        "</div>"
+                    );
+                    window.location.href = "/user/control-panel/" + success.redir_to;
+                }
             },
             403: function (jqXHR) {
                 var message = jqXHR.responseJSON.message;

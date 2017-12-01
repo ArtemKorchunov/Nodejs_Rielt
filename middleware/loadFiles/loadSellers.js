@@ -1,4 +1,5 @@
 var dateConvert = require("../../lib/dateConvert");
+let assignSeller = require('../../public/js/assignModel/Customer');
 module.exports = (req, res, next) => {
     let models  = req.app.get('models');
     let this_model = models.Seller;
@@ -8,19 +9,7 @@ module.exports = (req, res, next) => {
                 req.seller = res.locals.Sellers = sellers;
             } else {
                 req.tableName = this_model.name;
-                res.locals.Cols  = dateConvert(sellers).map(seller => {
-                    return Object.assign(
-                        {},
-                        {
-                            _id: seller.seller_id,
-                            passportid: seller.passportid,
-                            name: seller.name,
-                            surname: seller.surname,
-                            last_name: seller.last_name,
-                            birthday: seller.birthday,
-                        }
-                    )
-                });
+                res.locals.Cols  = assignSeller(dateConvert(sellers));
             }
             next();
         }

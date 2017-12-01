@@ -29,17 +29,63 @@ Object.keys(db).forEach(modelName => {
         db[modelName].associate(db);
     }
 });
-
+let sync_argumetn_of = false;
 sequelize.sync({
-    force:false,
+    force:sync_argumetn_of,
     logging: console.log
 }).then(function generate() {
-
-    // db.Customer.create('1','MT564587','Nikita','Chernenko','Vadimovich','01.01.1945');
-    // db.Seller.create('1','MT565477','Ilia','Sakovich','Vadimovich','01.01.1995');
-    // db.Flat.create('1','Xarkov','Pushkin','225B','4','5','9','40','1', {
-    //     fields:['flat_id','city','street','flat','room_amount','stage','total_floors','size','seller_id']
-    // });
+    var d = arguments;
+    if (sync_argumetn_of) {
+        db.Customer.bulkCreate([
+            {
+                passportid: 'MT564587',
+                name: 'Nikita',
+                surname: 'Chernenko',
+                last_name: 'Vadimovich',
+                birthday: '1945-01-01'
+            }
+        ]);
+        db.Seller.bulkCreate([
+            {
+                seller_id: 25,
+                passportid: 'MT565477',
+                name: 'Ilia',
+                surname: 'Sakovich',
+                last_name: 'Vadimovich',
+                birthday: '1999-01-01'
+            }
+        ]);
+        db.Flat.bulkCreate([
+            {
+                flat_id: '1',
+                city: 'Xarkov',
+                street: 'Pushkin',
+                flat: '225B',
+                room_amount: '4',
+                stage: '5',
+                total_floors: '9',
+                size: '40',
+                seller_id: '25'
+            }
+        ]);
+        let exampleA = db.User.build();
+        exampleA.createUser(exampleA, 'admin', '04061974', 5, function () {
+        });
+        let exampleU = db.User.build();
+        exampleU.createUser(exampleU, 'user', '04061974', 1, function (err) {
+            db.Profile.create({name: 'Artem', surname: 'Korchunov', user_username: 'user'});
+            db.Soldout.bulkCreate([
+                {
+                    price_of_realty: 20000,
+                    term_of_lease: '2018-01-01',
+                    deposit_money: 2000,
+                    cust_id: 1,
+                    flat_id: 1,
+                    profile_id: 1
+                }
+            ])
+        });
+    }
 });
 
 db.sequelize = sequelize;

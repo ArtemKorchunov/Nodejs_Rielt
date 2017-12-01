@@ -1,7 +1,7 @@
 exports.get = function(req, res, next) {
     res.render('user/control-panel/forms/add-soldout',
         {
-            ColumnName: [['Price of realty','number'],['Term of lease', 'date'],['Deposit money','number'],['Customer'],['Flat'],['Seller']],
+            ColumnName: [['Price of realty','number'],['Term of lease', 'date'],['Deposit money','number'],['Customer'],['Flat'],['Agent']],
             tableName: req.tableName
         }
     );
@@ -14,7 +14,9 @@ exports.post = (req, res, next) => {
                 res.send({message:"Soldout has been created successful!" ,redir_to: "add-soldout"});
             },
             err => {
-                res.status(403).send({message: 'All fields must be completed!'});
+                let path = err.errors[0].path;
+                let message = err.errors[0].message;
+                res.status(403).send({message: message, path: path});
             }
         )
     } else {

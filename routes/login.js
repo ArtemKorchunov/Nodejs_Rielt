@@ -1,15 +1,6 @@
 var config = require('../config');
 
 exports.get = function(req, res, next) {
-    let models  = req.app.get('models');
-    models.User.findById('admin').then( user => {
-        if (!user || user.length === 0){
-            var exampleA =  models.User.build();
-            exampleA.createUser(exampleA,'admin','04061974', 5, function () {});
-            var exampleU =  models.User.build();
-            exampleU.createUser(exampleU,'user','04061974',1 , function (err) {})
-        }
-    });
     if (req.session.id_user){
         res.redirect('/');
     } else {

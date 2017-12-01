@@ -59,6 +59,8 @@
                 $('#universal-submit').html('Search  ' + table_name)
                 $('.table').addClass('search').removeClass('edit').removeClass('add');
                 form_inputs.not("input[type=radio]").val('');
+            } else if(from_button.id.indexOf('redirect-form') + 1){
+
             }
             $('#radio1').val("1");
             $('#radio2').val("0");

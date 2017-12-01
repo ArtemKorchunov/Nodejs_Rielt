@@ -10,7 +10,9 @@ exports.post = (req, res, next) => {
                     res.send({message: `${model} has been changed successful!` ,redir_to: `add-${model.toLowerCase()}`});
                 },
                 err => {
-                    res.status(403).send({message: 'Something went wrong!'});
+                    let path = err.errors[0].path;
+                    let message = err.errors[0].message;
+                    res.status(403).send({message: message, path: path});
                 }
             );
         },

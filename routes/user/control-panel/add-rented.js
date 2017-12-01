@@ -1,7 +1,7 @@
 exports.get = (req, res, next) => {
     res.render('user/control-panel/forms/add-rented',
         {
-            ColumnName: [['Price for month','text'],['Term of rented','text'],['Full time','text'],['Customer'],['Flat'],['Seller']],
+            ColumnName: [['Price for month','text'],['Term of rented','text'],['Full time','text'],['Customer'],['Flat'],['Agent']],
             tableName: req.tableName
         }
     );
@@ -14,7 +14,9 @@ exports.post = (req, res, next) => {
                 res.send({message:"Rented has been created successful!" ,redir_to: "add-rented"});
             },
             err => {
-                res.status(403).send({message: 'All fields must be completed!'});
+                let path = err.errors[0].path;
+                let message = err.errors[0].message;
+                res.status(403).send({message: message, path: path});
             }
         )
     } else {

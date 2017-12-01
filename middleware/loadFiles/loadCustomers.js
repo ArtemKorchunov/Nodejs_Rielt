@@ -1,4 +1,5 @@
-var dateConvert = require("../../lib/dateConvert");
+let dateConvert = require("../../lib/dateConvert");
+let assignCustomer = require('../../public/js/assignModel/Customer');
 module.exports = (req, res, next) => {
     let models  = req.app.get('models');
     let this_model = models.Customer;
@@ -11,19 +12,7 @@ module.exports = (req, res, next) => {
             }
             else {
                 req.tableName = this_model.name;
-                res.locals.Cols  = dateConvert(customers).map(customer => {
-                    return Object.assign(
-                        {},
-                        {
-                            _id: customer.cust_id,
-                            passportid: customer.passportid,
-                            name: customer.name,
-                            surname: customer.surname,
-                            last_name: customer.last_name,
-                            birthday: customer.birthday,
-                        }
-                    )
-                });
+                res.locals.Cols  = assignCustomer(dateConvert(customers))
             }
             next();
         },

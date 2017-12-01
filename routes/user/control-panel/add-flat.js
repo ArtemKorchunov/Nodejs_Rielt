@@ -18,7 +18,9 @@ exports.post = (req, res, next) => {
                 res.send({message:"Flat has been created successful!" ,redir_to: "add-flat"});
             },
             err => {
-                res.status(403).send({message: 'All fields must be completed!'});
+                let path = err.errors[0].path;
+                let message = err.errors[0].message;
+                res.status(403).send({message: message, path: path});
             }
         )
     } else {

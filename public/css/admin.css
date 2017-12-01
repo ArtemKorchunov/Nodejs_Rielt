@@ -79,3 +79,7 @@ h1 {
 .btn.btn-danger.btn-sm.func-icon {
     width: 31px;
 }
+
+.span-sort {
+    cursor: pointer;
+}

@@ -1,4 +1,5 @@
-var dateConvert = require("../../lib/dateConvert");
+let dateConvert = require("../../lib/dateConvert");
+let assignSoldout = require('../../public/js/assignModel/joinSoldout');
 module.exports = (req,res,next) => {
     let models  = req.app.get('models');
     let this_model = models.Soldout;
@@ -16,20 +17,7 @@ module.exports = (req,res,next) => {
         soldouts => {
             //todo refactor this
             req.tableName = this_model.name;
-            res.locals.Cols = dateConvert(soldouts).map(soldout => {
-                return Object.assign(
-                    {},
-                    {
-                        _id: soldout.soldout_id,
-                        price_of_realty: soldout.price_of_realty,
-                        term_of_lease: soldout.term_of_lease,
-                        deposit_money: soldout.deposit_money,
-                        'cust id' : `${soldout['Customer.surname']} ${soldout['Customer.name']} ${soldout['Customer.last_name']}`,
-                        'flat id' : `${soldout['Flat.city']} ${soldout['Flat.street']} ${soldout['Flat.flat']}`,
-                        'profile id':`${soldout['Profile.name']} ${soldout['Profile.surname']}`
-                    }
-                )
-            });
+            res.locals.Cols = assignSoldout(dateConvert(soldouts));
             next();
         }
     );

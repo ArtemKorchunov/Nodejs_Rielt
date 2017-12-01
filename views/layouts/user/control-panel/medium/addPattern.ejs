@@ -4,9 +4,8 @@
     <div class="row">
         <%-partial('../../../../partials/leftNav')%>
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
-
             <div class="table-responsive">
-                <table class="table table-striped" id="<%= tableName%>">
+                <table class="table table-striped" id="<%= tableName%>" style="min-width: 896px;">
                     <thead>
                     <tr>
                         <th class="row justify-content-center">
@@ -20,15 +19,18 @@
                         <% ColumnName.forEach(function (value) {%>
                         <th>
                             <%-value[0]%>
+                            <span class="align-middle span-sort" id="span-<%-value[0]%>">
+                                <i class="fa fa-sort" aria-hidden="true"></i>
+                            </span>
                         </th>
                         <% }) %>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="tbody-info">
                     <% var column_number = 1;%>
                     <% if (Cols) {%>
                         <% Cols.forEach(function(item){ %>
-                        <tr>
+                        <tr id="tr-column-id-<%=item._id%>">
                             <td class="row justify-content-center">
                                 <form class="form-inline" id="del-form">
                                     <input type="hidden" id="<%= 'column-' + column_number%>" class="this-column-id" name="id" value="<%= item._id%>">
@@ -74,3 +76,4 @@
     </div>
 </div>
 <script src="/js/ajax/user/control-panel/del-column.js"></script>
+<script src="/js/ajax/column-sort.js"></script>
