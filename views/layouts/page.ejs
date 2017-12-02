@@ -12,12 +12,60 @@
     <script src="/vendor/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="/vendor/bower_components/tether/dist/js/tether.min.js"></script>
     <script src="/vendor/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
+    <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
     <title>Rielt</title>
 </head>
 <body>
-<%-partial('../partials/topNav')%>
-<%-body -%>
+    <%-partial('../partials/topNav')%>
+    <%-body -%>
+    <script>
+        $('#ModalLong').on('hidden.bs.modal', function (e) {
+            var d = arguments;
+        })
+        $('#ModalLong').on('show.bs.modal', function (e) {
+            var from_button = e.relatedTarget;
+            var form_inputs = $('.form-control');
+            var table = $(".table");
+            var table_name = table.attr('id');
+            table_name = table_name.toLowerCase();
+            if (from_button.id.indexOf('edit-form') + 1){
+                $('#universal-submit').html('Change ' + table_name);
+                $('.table').addClass('edit').removeClass('add').removeClass('search');
+                var column_number = $(from_button.children[0]).val();
+                $("#hidden-input-in-form").val(column_number);
+                var this_columns = $("." + column_number);
+                var i_column = 0;
+                for (var i = 0; i < this_columns.length; i++){
+                    var current_column = this_columns[i_column];
+                    var current_input =  form_inputs[i];
+                    var localName = current_input.localName;
+                    if (localName === 'input'){
+                        current_input.value = current_column.innerText;
+                        i_column++;
+                    } else if (localName === 'select'){
 
+                    }
+                    else if (localName ==='radio'){
+
+                    }
+                }
+            }
+            else if (from_button.id.indexOf('req-form') + 1){
+                $('#universal-submit').html('Create  ' + table_name)
+                $('.table').addClass('add').removeClass('edit').removeClass('search');;
+                form_inputs.not("input[type=radio]").val('');
+            }
+            else if(from_button.id.indexOf('search-form') + 1){
+                $('#universal-submit').html('Search  ' + table_name)
+                $('.table').addClass('search').removeClass('edit').removeClass('add');
+                form_inputs.not("input[type=radio]").val('');
+            } else if(from_button.id.indexOf('redirect-form') + 1){
+
+            }
+            $('#radio1').val("1");
+            $('#radio2').val("0");
+        })
+
+    </script>
 </body>
 </html>

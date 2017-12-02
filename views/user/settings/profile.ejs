@@ -1,0 +1,19 @@
+<% layout('../../layouts/user/settings/medium/shellCard')%>
+<h4 class="card-title">Profile</h4>
+<div class="" style="max-width: 300px; margin: 0 auto;">
+    <div class="card">
+        <ul class="list-group list-group-flush">
+            <!--todo make this look more readable-->
+            <!--todo make normal date parser!-->
+            <%  for (var val in converted){%>
+                <li class="list-group-item">
+                    <% if (val == "empty") {%>
+                       <%= converted[val] %>  <a class="nav-link p-0" href="/user/settings/change-profile">change it!</a>
+                    <% } else {%>
+                        <%= converted[val]%>
+                    <% }%>
+                </li>
+            <% }%>
+        </ul>
+    </div>
+</div>

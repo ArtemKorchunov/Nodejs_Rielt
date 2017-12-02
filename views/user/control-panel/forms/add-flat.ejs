@@ -1,0 +1,27 @@
+<% layout('../../../layouts/user/control-panel/medium/addPattern')%>
+<form id="req-form" class="universal-form">
+    <input type="hidden" id="hidden-input-in-form">
+    <%-partial('../../../partials/user/form-item')%>
+    <div class="form-group row justify-content-center">
+        <label for="recipient-name" class="col-2 col-form-label">Seller: </label>
+        <select name="Seller id" class="offset-1 offset-sm-0 col-7 custom-select form-control" id="owner-select">
+            <option value="" selected>Choose one of the owner.</option>
+            <% Sellers.forEach(function (seller) {%>
+                <option value="<%= seller.seller_id %>" selected><%= seller.name + " " + seller.surname + " " + seller.last_name %></option>
+            <% }) %>
+        </select>
+    </div>
+    <div class="form-group row justify-content-center">
+        <label for="recipient-name" class="col-2 col-form-label">Type: </label>
+        <select name="service" class="offset-1 offset-sm-0 col-7 custom-select form-control" id="owner-select">
+            <option value="" selected>Choose one of the type.</option>
+            <option value="1" >For selling.</option>
+            <option value="0" >For renting.</option>
+        </select>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" id="universal-submit">Create flat</button>
+    </div>
+</form>
+<script src="/js/ajax/user/control-panel/add-universal.js" ></script>

@@ -1,0 +1,45 @@
+<% layout('../../layouts/user/settings/medium/shellCard')%>
+<!--todo change admin.css name as it is in user usage-->
+<h4 class="card-title">Change profile</h4>
+<div class="" style="max-width: 400px; margin: 0 auto;">
+    <form id="req-form">
+        <div class="form-group col">
+            <div class="row">
+                <input type="text" name="name" id="NameInput" placeholder="Name" class="form-control col-5">
+                <input type="text" name="surname" id="SurnameInput" placeholder="Surname" class="form-control offset-1 col-6">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="dateInput">Date of birth</label>
+            <input class="form-control" name="birthday" id="dateInput" type="date" value="2017-08-19">
+        </div>
+        <div class="col">
+            <div class="p-md-1 row">
+                <label class="custom-control custom-radio">
+                    <input id="radio1" name="male" value="M" type="radio" class="custom-control-input" checked>
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">Male</span>
+                </label>
+                <label class="custom-control custom-radio">
+                    <input id="radio2" name="male" value="F" type="radio" class="custom-control-input">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">Female</span>
+                </label>
+            </div>
+        </div>
+        <div class="form-group col">
+            <div class="row">
+                <div class="col-8 p-0">
+                    <label for="">Work location</label>
+                    <input type="text" name="work_location" placeholder="work-location" class="form-control">
+                </div>
+                <div class="offset-1 col-3 p-0">
+                    <label for="">Percent</label>
+                    <input type="text" name="pc_from_deal" class="form-control" placeholder="  %">
+                </div>
+            </div>
+        </div>
+            <button type="submit" class="btn btn-primary">Change your profile</button>
+    </form>
+</div>
+<script src="/js/ajax/user/settings/change-profile.js" ></script>

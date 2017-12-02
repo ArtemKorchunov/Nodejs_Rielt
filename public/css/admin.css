@@ -75,3 +75,11 @@ h1 {
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
 }
+
+.btn.btn-danger.btn-sm.func-icon {
+    width: 31px;
+}
+
+.span-sort {
+    cursor: pointer;
+}

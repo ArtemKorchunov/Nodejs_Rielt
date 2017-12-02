@@ -1,0 +1,79 @@
+<% layout('../../../page')%>
+<% stylesheet('/css/admin.css') %>
+<div class="container-fluid">
+    <div class="row">
+        <%-partial('../../../../partials/leftNav')%>
+        <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
+            <div class="table-responsive">
+                <table class="table table-striped" id="<%= tableName%>" style="min-width: 1043px;">
+                    <thead>
+                    <tr>
+                        <th class="row justify-content-center">
+                            <button type="button" id="button-req-form" class="btn btn-success btn-sm" data-toggle="modal" data-target="#ModalLong">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                            </button>
+                            <button type="button" id="button-search-form" class="btn btn-success btn-sm" data-toggle="modal" data-target="#ModalLong">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </button>
+                        </th>
+                        <% ColumnName.forEach(function (value) {%>
+                        <th>
+                            <%-value[0]%>
+                            <span class="align-middle span-sort" id="span-<%-value[0]%>">
+                                <i class="fa fa-sort" aria-hidden="true"></i>
+                            </span>
+                        </th>
+                        <% }) %>
+                    </tr>
+                    </thead>
+                    <tbody class="tbody-info">
+                    <% var column_number = 1;%>
+                    <% if (Cols) {%>
+                        <% Cols.forEach(function(item){ %>
+                        <tr id="tr-column-id-<%=item._id%>">
+                            <td class="row justify-content-center">
+                                <form class="form-inline" id="del-form">
+                                    <input type="hidden" id="<%= 'column-' + column_number%>" class="this-column-id" name="id" value="<%= item._id%>">
+                                <button type="submit" class="btn btn-danger btn-sm func-icon">
+                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                </button>
+                                </form>
+                                <button type="button" id="but-edit-form" class="btn btn-info btn-sm func-icon" data-toggle="modal" data-target="#ModalLong">
+                                    <input type="hidden" name="column-number" value="<%= 'column-' + column_number%>">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </button>
+                            </td>
+                            <% for (let key in item) {%>
+                                <% if (!(key.indexOf('_id') + 1)) {%>
+                                    <% if (Date.parse(item[key])) {%>
+                                    <td class="column-<%= column_number %> <%= key%>"><%= item[key]%></td>
+                                    <% } else {%>
+                                    <td class="column-<%= column_number %> <%= key%>"><%= item[key]%></td>
+                                    <% }%>
+                                <% }%>
+                            <% } %>
+                            <% column_number++ %>
+                        </tr>
+                        <% }); %>
+                    <% } %>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal fade" id="ModalLong" tabindex="-1" role="dialog" aria-labelledby="ModalLongTitle" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="ModalLongTitle">Modal title</h5>
+                        </div>
+                        <div class="modal-body">
+                            <%-body -%>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+<script src="/js/ajax/user/control-panel/del-column.js"></script>
+<script src="/js/ajax/column-sort.js"></script>
