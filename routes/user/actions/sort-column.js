@@ -1,9 +1,18 @@
+let define_sort = require('../../../public/js/defineTypeOfSort/index');
+
 exports.post = (req, res, next) => {
-    let column = req.body.params.column_name;
-    let model = req.body.params.table_name;
-    let type = req.body.params.sort_type;
+    let column = req.params.column_name.replace(/\s/ig,'_');
+    let model = req.params.table_name;
+    let type = req.params.sort_type;
     let models  = req.app.get('models');
     let this_model = models[model];
-
-    res.send({});
+    let options = {name: column, type: type};
+    define_sort(models,model,options).then(
+        result => {
+            res.send({result});
+        },
+        err => {
+            res.send({});
+        }
+    )
 };

@@ -11,6 +11,7 @@ module.exports = (items) => {
                 stage: flat.stage,
                 total_floors: flat.total_floors,
                 size: flat.size,
+                service: (flat.service == '1' ? 'Sale' : 'Rent'),
                 seller : `${flat['Seller.surname']} ${flat['Seller.name']} ${flat['Seller.last_name']}`
             }
         )

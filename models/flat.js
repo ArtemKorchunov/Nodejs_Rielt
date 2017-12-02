@@ -82,6 +82,10 @@ module.exports = (sequelize, Datatypes) => {
                     msg: 'room floors must be lower than 501'
                 }
             }
+        },
+        service: {
+            type: Datatypes.BOOLEAN,
+            allowNull: false
         }
     });
     Flat.associate = (models) => {

@@ -1,5 +1,5 @@
 var dateConvert = require("../../lib/dateConvert");
-let assignSeller = require('../../public/js/assignModel/Customer');
+let assignSeller = require('../../public/js/assignModel/Seller');
 module.exports = (req, res, next) => {
     let models  = req.app.get('models');
     let this_model = models.Seller;

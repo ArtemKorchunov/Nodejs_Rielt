@@ -11,6 +11,14 @@
             <% }) %>
         </select>
     </div>
+    <div class="form-group row justify-content-center">
+        <label for="recipient-name" class="col-2 col-form-label">Type: </label>
+        <select name="service" class="offset-1 offset-sm-0 col-7 custom-select form-control" id="owner-select">
+            <option value="" selected>Choose one of the type.</option>
+            <option value="1" >For selling.</option>
+            <option value="0" >For renting.</option>
+        </select>
+    </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary" id="universal-submit">Create flat</button>

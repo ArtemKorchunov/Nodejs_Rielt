@@ -43,6 +43,20 @@ sequelize.sync({
                 surname: 'Chernenko',
                 last_name: 'Vadimovich',
                 birthday: '1945-01-01'
+            },
+            {
+                passportid: 'MT564589',
+                name: 'Vadim',
+                surname: 'Chernenko',
+                last_name: 'Afanasiev',
+                birthday: '1945-01-01'
+            },
+            {
+                passportid: 'MT564588',
+                name: 'Nikita',
+                surname: 'Afanasiev',
+                last_name: 'Maksimov',
+                birthday: '1945-01-01'
             }
         ]);
         db.Seller.bulkCreate([
@@ -53,6 +67,20 @@ sequelize.sync({
                 surname: 'Sakovich',
                 last_name: 'Vadimovich',
                 birthday: '1999-01-01'
+            },
+            {
+                passportid: 'MT564589',
+                name: 'Vadim',
+                surname: 'Chernenko',
+                last_name: 'Afanasiev',
+                birthday: '1945-01-01'
+            },
+            {
+                passportid: 'MT564588',
+                name: 'Nikita',
+                surname: 'Afanasiev',
+                last_name: 'Maksimov',
+                birthday: '1945-01-01'
             }
         ]);
         db.Flat.bulkCreate([
@@ -65,7 +93,8 @@ sequelize.sync({
                 stage: '5',
                 total_floors: '9',
                 size: '40',
-                seller_id: '25'
+                seller_id: '25',
+                service: '1'
             }
         ]);
         let exampleA = db.User.build();

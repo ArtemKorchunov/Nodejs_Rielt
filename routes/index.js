@@ -55,6 +55,6 @@ module.exports = (app) => {
     app.post('/delete/column/:table_name', require('./user/actions/delete-column').post);
     app.post('/edit/column/:table_name/:id_name/:id',ValidateEditForms,ReplaceMethod, require('./user/actions/edit-column').post);
     app.post('/search/:table_name',ValidateEditForms,ReplaceMethod, require('./user/actions/search-column').post);
-    app.post('/sort/:table_name/:column_name/:sort_type')
+    app.post('/sort/:table_name/:column_name/:sort_type', require('./user/actions/sort-column').post)
 };
 

@@ -5,7 +5,7 @@
         <%-partial('../../../../partials/leftNav')%>
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
             <div class="table-responsive">
-                <table class="table table-striped" id="<%= tableName%>" style="min-width: 896px;">
+                <table class="table table-striped" id="<%= tableName%>" style="min-width: 1043px;">
                     <thead>
                     <tr>
                         <th class="row justify-content-center">
@@ -44,7 +44,7 @@
                                 </button>
                             </td>
                             <% for (let key in item) {%>
-                                <% if (!(key.indexOf('_id') +1) &&  key != "createdAt" && key != "updatedAt") {%>
+                                <% if (!(key.indexOf('_id') + 1)) {%>
                                     <% if (Date.parse(item[key])) {%>
                                     <td class="column-<%= column_number %> <%= key%>"><%= item[key]%></td>
                                     <% } else {%>
