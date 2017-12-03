@@ -4,7 +4,7 @@ module.exports = (models, options = []) => {
     return models.Flat.findAll(
         {
             order: options,
-            include: [{model: models.Seller, attributes: ['surname', 'name', 'last_name']}]
+            include: [{model: models.Seller, attributes: ['surname', 'name', 'last_name','seller_id']}]
             ,raw : true
         }
     ).then(

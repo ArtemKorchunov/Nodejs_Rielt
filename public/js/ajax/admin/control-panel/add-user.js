@@ -24,7 +24,7 @@ $('form').attr('id', 'req-form').on('submit', function() {
             403: function(jqXHR) {
                 $('form').attr('id', 'req-form').append(
                     "<div class=\"alert alert-danger\" role=\"alert\">" +
-                    "This is a danger alert—check it out!" +
+                    "Name has already exist!" +
                     "</div>"
                 );
                 $('.alert-danger').delay(4000).slideUp();

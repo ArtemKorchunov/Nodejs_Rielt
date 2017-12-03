@@ -29,7 +29,9 @@ module.exports = (sequelize, Datatypes) => {
                     args: '2200-01-01',
                     msg: 'Term of rented must be lower than 2200-01-01'
                 }
-            }
+            },
+            defaultValue: '0000-00-00'
+
         },
         full_time: {type: Datatypes.ENUM("1","0")}
     });
