@@ -4,12 +4,10 @@ let ValidateEditForms = require('../middleware/Validate/ValidateEditForms');
 let ValidateObj = require('../middleware/Validate/ValidateObj');
 let loadUsers = require('../middleware/loadFiles/loadUsers');
 let loadFlats = require('../middleware/loadFiles/loadFlats');
-let loadSellers = require('../middleware/loadFiles/loadSellers');
+let loadOwners = require('../middleware/loadFiles/loadOwners');
 let loadCustomers = require('../middleware/loadFiles/loadCustomers');
-let loadSoldouts = require('../middleware/loadFiles/loadSoldouts');
 let loadProfiles = require('../middleware/loadFiles/loadProfiles');
 let loadProfile = require('../middleware/loadFiles/loadProfile');
-let loadRenteds = require('../middleware/loadFiles/loadRenteds');
 let ReplaceMethod = require('../middleware/Validate/Replace-method');
 
 let joinFlats = require('../middleware/joinFiles/joinFlats');
@@ -37,11 +35,11 @@ module.exports = (app) => {
     app.post('/user/settings/change-profile',ValidateEditForms, require('./user/settings/change-profile').post);
     app.get('/user/settings/profile',loadProfile, require('./user/settings/profile').get);
 
-    app.get('/user/control-panel(/add-flat)?',joinFlats,loadSellers, require('./user/control-panel/add-flat').get);
+    app.get('/user/control-panel(/add-flat)?',joinFlats,loadOwners, require('./user/control-panel/add-flat').get);
     app.post('/user/control-panel/add-flat', require('./user/control-panel/add-flat').post);
 
-    app.get('/user/control-panel/add-seller',loadSellers, require('./user/control-panel/add-seller').get);
-    app.post('/user/control-panel/add-seller', require('./user/control-panel/add-seller').post);
+    app.get('/user/control-panel/add-owner',loadOwners, require('./user/control-panel/add-owner').get);
+    app.post('/user/control-panel/add-owner', require('./user/control-panel/add-owner').post);
 
     app.get('/user/control-panel/add-customer',loadCustomers, require('./user/control-panel/add-customer').get);
     app.post('/user/control-panel/add-customer', require('./user/control-panel/add-customer').post);

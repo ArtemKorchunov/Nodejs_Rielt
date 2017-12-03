@@ -5,12 +5,24 @@ module.exports = function(req, res, next) {
 
     let validate_obj = {};
     req['all_filled'] = true;
-    for (let key in info){
-        if (info[key] === "") {
-            req['all_filled'] = false;
-            break;
-        } else {
-            validate_obj[key] = info[key];
+    if ((req.url.indexOf('add-rented') + 1) || (req.url.indexOf('add-soldout') + 1)){
+        for (let key in info){
+            if (info[key] === "" && key !== "cust id") {
+                req['all_filled'] = false;
+                break;
+            } else if (key !== "cust id") {
+                validate_obj[key] = info[key];
+            }
+        }
+    }
+    else {
+        for (let key in info) {
+            if (info[key] === "") {
+                req['all_filled'] = false;
+                break;
+            } else {
+                validate_obj[key] = info[key];
+            }
         }
     }
     req['validate_obj'] = validate_obj;

@@ -35,7 +35,7 @@
                 $("#hidden-input-in-form").val(column_number);
                 var this_columns = $("." + column_number);
                 var i_column = 0;
-                var enable_status = false;
+                var disable_status;
                 for (var i = 0; i < form_inputs.length; i++){
                     var current_column = this_columns[i_column];
                     var current_input =  form_inputs[i];
@@ -47,8 +47,8 @@
                             i_column++;
                         }
                         else if (localType === "date"){
-                            if (enable_status) {
-                                current_input.disabled = false;
+                            if (disable_status !== undefined) {
+                                current_input.disabled = disable_status;
                             }
                             current_input.value = current_column.innerText;
                             i_column++;
@@ -59,11 +59,12 @@
                         }
                         else {
                             if (current_input.value === "1" && current_column.innerText === "1"){
+                                disable_status = true;
                                 current_input.checked = true;
                                 i_column++;
                             }
                             else if (current_input.value === "0" && current_column.innerText === "0"){
-                                enable_status = true;
+                                disable_status = false;
                                 current_input.checked = true;
                                 i_column++;
                             }

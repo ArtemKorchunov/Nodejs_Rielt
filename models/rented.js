@@ -7,6 +7,7 @@ module.exports = (sequelize, Datatypes) => {
         },
         price_for_month: {
             type: Datatypes.INTEGER,
+            allowNull: false,
             validate: {
                 min: {
                     args: 100,
@@ -30,10 +31,12 @@ module.exports = (sequelize, Datatypes) => {
                     msg: 'Term of rented must be lower than 2200-01-01'
                 }
             },
-            defaultValue: '0000-00-00'
 
         },
-        full_time: {type: Datatypes.ENUM("1","0")}
+        full_time: {
+            type: Datatypes.ENUM("1","0"),
+            allowNull: false
+        }
     });
     Rented.associate = (models) => {
         models.Rented.belongsTo(models.Flat, {foreignKey: {name: "flat_id" ,allowNull: false}});

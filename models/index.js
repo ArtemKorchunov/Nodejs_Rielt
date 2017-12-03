@@ -45,6 +45,27 @@ sequelize.sync({
                 birthday: '1945-01-01'
             },
             {
+                passportid: 'MT564200',
+                name: 'Nikita',
+                surname: 'Chernenko',
+                last_name: 'Vadimovich',
+                birthday: '1945-01-01'
+            },
+            {
+                passportid: 'MT564201',
+                name: 'Nikita',
+                surname: 'Chernenko',
+                last_name: 'Vadimovich',
+                birthday: '1945-01-01'
+            },
+            {
+                passportid: 'MT564202',
+                name: 'Nikita',
+                surname: 'Chernenko',
+                last_name: 'Vadimovich',
+                birthday: '1945-01-01'
+            },
+            {
                 passportid: 'MT564589',
                 name: 'Vadim',
                 surname: 'Chernenko',
@@ -59,9 +80,9 @@ sequelize.sync({
                 birthday: '1945-01-01'
             }
         ]);
-        db.Seller.bulkCreate([
+        db.Owner.bulkCreate([
             {
-                seller_id: 25,
+                owner_id: 25,
                 passportid: 'MT565477',
                 name: 'Ilia',
                 surname: 'Sakovich',
@@ -93,7 +114,7 @@ sequelize.sync({
                 stage: '5',
                 total_floors: '9',
                 size: '40',
-                seller_id: '25',
+                owner_id: '25',
                 service: '1'
             }
         ]);

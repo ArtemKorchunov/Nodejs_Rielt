@@ -1,5 +1,5 @@
 exports.get = function(req, res, next) {
-    res.render('user/control-panel/forms/add-seller',
+    res.render('user/control-panel/forms/add-owner',
         {
             ColumnName: [ ['PassportId','text'],['Name','text'],['Surname','text'],['Last name','text'], ['Birthday','date']],
             tableName: req.tableName
@@ -9,9 +9,9 @@ exports.get = function(req, res, next) {
 exports.post = (req, res, next) => {
     let models  = req.app.get('models');
     if (req.all_filled){
-        models.Seller.create(req.validate_obj).then(
+        models.Owner.create(req.validate_obj).then(
             item => {
-                res.send({message:"Seller has been created successful!" ,redir_to: "add-seller"});
+                res.send({message:"Owner has been created successful!" ,redir_to: "add-owner"});
             },
             err => {
                 let path = err.errors[0].path;

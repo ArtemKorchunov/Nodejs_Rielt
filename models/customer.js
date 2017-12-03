@@ -56,7 +56,7 @@ module.exports = (sequelize, Datatypes) => {
         }
     });
     Customer.associate = (models) => {
-        models.Customer.hasMany(models.Soldout, {foreignKey: { name: "cust_id", allowNull: false}});
+        models.Customer.hasMany(models.Soldout, {foreignKey: { name: "cust_id"}});
         models.Customer.hasMany(models.Rented, {foreignKey: { name: "cust_id"}});
     };
     return Customer;

@@ -1,16 +1,16 @@
-let assignSeller =  require('../assignModel/Seller');
+let assignOwner =  require('../assignModel/Owner');
 let dateConvert = require("../../../lib/dateConvert");
-//todo make seller and customer without duplication like flat...
+//todo make owner and customer without duplication like flat...
 module.exports = (models,options = {}) => {
     options = [[options.name,options.type]];
-    return models.Seller.findAll(
+    return models.Owner.findAll(
         {
             order: options
             ,raw : true
         }
     ).then(
-        sellers => {
-            return assignSeller(dateConvert(sellers));
+        owners => {
+            return assignOwner(dateConvert(owners));
         }
     )
 };

@@ -1,7 +1,7 @@
 let Customer_sort = require('./Customer');
 let Flat_sort = require('./Flat');
 let Rented_sort = require('./Rented');
-let Seller_sort = require('./Seller');
+let Owner_sort = require('./Owner');
 let Soldout_sort = require('./Soldout');
 
 module.exports = ((models,module,options) => {
@@ -12,8 +12,8 @@ module.exports = ((models,module,options) => {
             case 'Rented':
                 return Rented_sort(models,options);
                 break;
-            case 'Seller':
-                return Seller_sort(models, options);
+            case 'Owner':
+                return Owner_sort(models, options);
                 break;
             case 'Soldout':
                 return Soldout_sort(models, options);

@@ -1,6 +1,6 @@
 module.exports = (sequelize, Datatypes) => {
-    var Seller = sequelize.define("Seller", {
-        seller_id: {
+    var Owner = sequelize.define("Owner", {
+        owner_id: {
             type: Datatypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,
@@ -21,7 +21,7 @@ module.exports = (sequelize, Datatypes) => {
             validate: {
                 is: {
                     args: ["^([a-z]|[а-я]){2,15}$",'i'],
-                    msg:  'Seller name must be higher than 1 symbol and lower 16'
+                    msg:  'Owner name must be higher than 1 symbol and lower 16'
                 }
             }
         },
@@ -30,15 +30,16 @@ module.exports = (sequelize, Datatypes) => {
             validate: {
                 is: {
                     args: ["^([a-z]|[а-я]){2,15}$",'i'],
-                    msg:  'Seller surname must be higher than 1 symbol and lower 16'
+                    msg:  'Owner surname must be higher than 1 symbol and lower 16'
                 }
-            }},
+            }
+        },
         last_name: {
             type: Datatypes.STRING(25),
             validate: {
                 is: {
                     args: ["^([a-z]|[а-я]){2,15}$",'i'],
-                    msg:  'Seller last name must be higher than 1 symbol and lower 16'
+                    msg:  'Owner last name must be higher than 1 symbol and lower 16'
                 }
             }
         },
@@ -67,10 +68,10 @@ module.exports = (sequelize, Datatypes) => {
             }
         },
         instanceMethods: {
-            getObj_val: (sellers) => {
+            getObj_val: (owners) => {
                 let i = 0;
                 let arr = [];
-                sellers.forEach( (item)=> {
+                owners.forEach( (item)=> {
                     arr[i++] = item.getAll_val();
                 });
                 return arr;
@@ -78,8 +79,8 @@ module.exports = (sequelize, Datatypes) => {
         }
     });
 
-    Seller.associate = (models) => {
-        models.Seller.hasMany(models.Flat, {foreignKey: {name: "seller_id", allowNull:false}});
+    Owner.associate = (models) => {
+        models.Owner.hasMany(models.Flat, {foreignKey: {name: "owner_id", allowNull:false}});
     };
-    return Seller;
+    return Owner;
 };

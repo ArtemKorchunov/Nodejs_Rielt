@@ -11,11 +11,11 @@
         </select>
     </div>
     <div class="form-group row justify-content-center">
-        <label for="recipient-name" class="col-2 col-form-label">Seller: </label>
-        <select name="Seller id" class="offset-1 offset-sm-0 col-7 custom-select form-control" id="owner-select">
+        <label for="recipient-name" class="col-2 col-form-label">Owner: </label>
+        <select name="Owner id" class="offset-1 offset-sm-0 col-7 custom-select form-control" id="owner-select">
             <option value="" selected>Choose one of the owner.</option>
-            <% Sellers.forEach(function (seller) {%>
-                <option value="<%= seller.seller_id %>" selected><%= seller.surname + " " + seller.name + " " + seller.last_name %></option>
+            <% Owners.forEach(function (owner) {%>
+                <option value="<%= owner.owner_id %>" selected><%= owner.surname + " " + owner.name + " " + owner.last_name %></option>
             <% }) %>
         </select>
     </div>
