@@ -28,6 +28,8 @@ module.exports = (app) => {
     app.get('/admin', require('./admin/admin').get);
     app.post('/admin', require('./admin/admin').post);
     app.get('/admin/control-panel(/add-user)?',loadUsers, require('./admin/control-panel/index').get);
+    app.get('/admin/control-panel/sql', require('./admin/control-panel/sql').get);
+    app.post('/admin/control-panel/sql', require('./admin/control-panel/sql').post);
 
     app.get('/user', require('./user/user').get);
 

@@ -35,15 +35,50 @@
                 $("#hidden-input-in-form").val(column_number);
                 var this_columns = $("." + column_number);
                 var i_column = 0;
-                for (var i = 0; i < this_columns.length; i++){
+                var enable_status = false;
+                for (var i = 0; i < form_inputs.length; i++){
                     var current_column = this_columns[i_column];
                     var current_input =  form_inputs[i];
                     var localName = current_input.localName;
+                    var localType = current_input.type;
                     if (localName === 'input'){
-                        current_input.value = current_column.innerText;
-                        i_column++;
-                    } else if (localName === 'select'){
+                        if (localType === 'text') {
+                            current_input.value = current_column.innerText;
+                            i_column++;
+                        }
+                        else if (localType === "date"){
+                            if (enable_status) {
+                                current_input.disabled = false;
+                            }
+                            current_input.value = current_column.innerText;
+                            i_column++;
+                        }
+                        else if (localType === 'number'){
+                            current_input.value = Number(current_column.innerText);
+                            i_column++;
+                        }
+                        else {
+                            if (current_input.value === "1" && current_column.innerText === "1"){
+                                current_input.checked = true;
+                                i_column++;
+                            }
+                            else if (current_input.value === "0" && current_column.innerText === "0"){
+                                enable_status = true;
+                                current_input.checked = true;
+                                i_column++;
+                            }
+                        }
 
+                    } else if (localName === 'select'){
+                        var children_cur_input = current_input.children
+                        for (var key in children_cur_input){
+                            var this_option = children_cur_input[key];
+                            if (this_option.innerText === current_column.innerText) {
+                                this_option.selected = true;
+                                break;
+                            }
+                        };
+                        i_column++;
                     }
                     else if (localName ==='radio'){
 

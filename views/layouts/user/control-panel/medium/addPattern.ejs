@@ -45,11 +45,7 @@
                             </td>
                             <% for (let key in item) {%>
                                 <% if (!(key.indexOf('_id') + 1)) {%>
-                                    <% if (Date.parse(item[key])) {%>
                                     <td class="column-<%= column_number %> <%= key%>"><%= item[key]%></td>
-                                    <% } else {%>
-                                    <td class="column-<%= column_number %> <%= key%>"><%= item[key]%></td>
-                                    <% }%>
                                 <% }%>
                             <% } %>
                             <% column_number++ %>
