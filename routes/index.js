@@ -51,15 +51,15 @@ module.exports = (app) => {
     app.get('/user/control-panel/add-soldout',joinSoldouts, loadCustomers,loadFlats,loadProfiles, require('./user/control-panel/add-soldout').get);
     app.post('/user/control-panel/add-soldout', require('./user/control-panel/add-soldout').post);
 
-    app.get('/user/control-panel/search-rented',loadProfiles, require('./user/control-panel/search-rented').get);
+    app.get('/user/control-panel/search-rented',loadProfiles,loadCustomers, require('./user/control-panel/search-rented').get);
     app.post('/user/search-rented',ValidateSearchForms, require('./user/control-panel/search-rented').post);
-    app.get('/user/control-panel/search-soldout',loadProfiles, require('./user/control-panel/search-soldout').get);
+    app.get('/user/control-panel/search-soldout',loadProfiles,loadCustomers, require('./user/control-panel/search-soldout').get);
     app.post('/user/search-soldout',ValidateSearchForms, require('./user/control-panel/search-soldout').post);
 
     app.get('/logout', require('./logout').get);
 
     app.post('/delete/column/:table_name', require('./user/actions/delete-column').post);
-    app.post('/edit/column/:table_name/:id_name/:id',ValidateEditForms,ReplaceMethod, require('./user/actions/edit-column').post);
+    app.post('/edit/column/:table_name/:id',ValidateEditForms,ReplaceMethod, require('./user/actions/edit-column').post);
     app.post('/search/:table_name',ValidateEditForms,ReplaceMethod, require('./user/actions/search-column').post);
     app.post('/sort/:table_name/:column_name/:sort_type', require('./user/actions/sort-column').post)
 };

@@ -1,7 +1,7 @@
 <% layout('../../../layouts/user/control-panel/medium-search/addPattern')%>
 <form id="req-form" class="universal-form rented">
     <input type="hidden" id="hidden-input-in-form">
-    <div class=" offset-1 col-10 align-self-center">
+    <div class=" offset-1 col-10 align-self-center" id="wrapper-form">
         <div class="form-group">
             <label for="dateInput">Price for month</label>
             <div class="row ml-0">
@@ -31,8 +31,8 @@
     </div>
 
     <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" id="universal-submit">Create owner</button>
+        <button type="button" class="btn btn-secondary" id="universal-cancel" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" id="universal-submit" >Create owner</button>
     </div>
 </form>
 <script>

@@ -3,7 +3,8 @@ let dateConvert = require("../../../lib/dateConvert");
 
 exports.get = function(req, res, next) {
     res.render('user/control-panel/search-forms/search-soldout.ejs', {
-        ColumnName: [['Price for realty'], ['Term of contract'], ['Deposit money'], ['City'], ['Street'], ['Room amount'], ['Stage'], ['Total floors'], ['Size'], ['Agent']]
+        ColumnName: [['PassportId','text'],['Name','text'],['Surname','text'],['Last name','text'], ['Birthday','date'],['Price for realty'], ['Term of contract'], ['Deposit money'], ['City'], ['Street'], ['Room amount'], ['Stage'], ['Total floors'], ['Size'], ['Agent']],
+        tableName: 'Soldout'
     });
 };
 exports.post = function (req, res, next) {
@@ -41,7 +42,7 @@ exports.post = function (req, res, next) {
     ).then(
         matches => {
             let items = assignSearchSoldout(dateConvert(matches));
-            res.send({result: items})
+            res.send({result: items, type: 'soldout'})
         },
         err => {
             res.status('403').send({message:"Something went wrong."});

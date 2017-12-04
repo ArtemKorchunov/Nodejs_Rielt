@@ -4,7 +4,8 @@ let dateConvert = require("../../../lib/dateConvert");
 exports.get = function(req, res, next) {
     res.render('user/control-panel/search-forms/search-rented.ejs',
         {
-            ColumnName: [ ['Price for month'],['Full time'],['Term of rented'] ,['City'], ['Street'],['Room amount'],['Stage'],['Total floors'],['Size'],['Agent']]
+            ColumnName: [ ['PassportId','text'],['Name','text'],['Surname','text'],['Last name','text'], ['Birthday','date'],['Price for month'],['Full time'],['Term of rented'] ,['City'], ['Street'],['Room amount'],['Stage'],['Total floors'],['Size'],['Agent']],
+            tableName: 'Rented'
         }
     );
 };
@@ -44,7 +45,7 @@ exports.post = function (req, res, next) {
     ).then(
         matches => {
             let items = assignSearchRented(dateConvert(matches));
-            res.send({result: items})
+            res.send({result: items, type: 'rented'})
         },
         err => {
             res.status('403').send({message:"Something went wrong."});

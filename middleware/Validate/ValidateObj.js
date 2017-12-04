@@ -19,10 +19,10 @@ module.exports = function(req, res, next) {
     }
     else {
         for (let key in info) {
-            if (info[key] === "") {
+            if (info[key] === "" && key !== 'deal_id' && key !== 'solve_deal') {
                 req['all_filled'] = false;
                 break;
-            } else {
+            } else if (key !== 'deal_id' && key !== 'solve_deal'){
                 validate_obj[key] = info[key];
             }
         }

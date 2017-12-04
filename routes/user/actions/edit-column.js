@@ -11,7 +11,7 @@ exports.post = (req, res, next) => {
                 ok => {
                     item.update(req.body.validate_obj).then(
                         result => {
-                            res.send({
+                             res.send({
                                 message: `${model} has been changed successful!`,
                                 redir_to: `add-${model.toLowerCase()}`
                             });

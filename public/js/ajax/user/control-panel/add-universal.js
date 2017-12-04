@@ -9,7 +9,7 @@ $('form#req-form').on('submit', function() {
         var id_and_name = $('#'+ column_number);
         var id_value = id_and_name.val();
         var id_name = id_and_name.attr('name');
-        var table_name_id = "/"+ id_name + "/" + id_value;
+        var table_name_id =  "/" + id_value;
         url += table_name_id;
     } else if (tableName.hasClass('add')) {
         url = '/user/control-panel/add-' +  table_id.toLowerCase();

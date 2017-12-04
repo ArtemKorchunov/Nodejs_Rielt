@@ -3,7 +3,7 @@ module.exports = (items) => {
         return Object.assign(
             {},
             {
-                _id: search_soldout.rented_id,
+                _id: search_soldout.soldout_id,
                 price_of_realty: search_soldout.price_of_realty,
                 term_of_contract: search_soldout.term_of_contract,
                 deposit_money: search_soldout.deposit_money,

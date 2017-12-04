@@ -5,7 +5,7 @@
         <%-partial('../../../../partials/leftNav')%>
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
             <div class="table-responsive">
-                <table class="table table-striped" id="" style="overflow: hidden;">
+                <table class="table table-striped search-name" id="<%= tableName%>" style="min-width: 1240px;">
                     <thead>
                     <tr>
                         <th class="row justify-content-center">
@@ -14,18 +14,18 @@
                             </button>
                         </th>
                         <% ColumnName.forEach(function (value) {%>
+                        <% if (value.length !== 2){%>
                         <th>
                             <%-value[0]%>
                             <span class="align-middle span-sort" id="span-<%-value[0]%>">
-                                <i class="fa fa-sort" aria-hidden="true"></i>
+
                             </span>
                         </th>
+                        <% }%>
                         <% }) %>
                     </tr>
                     </thead>
-                    <tbody class="tbody-info">
-
-
+                    <tbody class="tbody-info" id="tbody">
                     </tbody>
                 </table>
             </div>
@@ -35,10 +35,37 @@
                         <div class="modal-header">
                             <h5 class="modal-title" id="ModalLongTitle">Modal title</h5>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body" id="choose-customer-body" style="display: none;">
+                            <form id="req-form-choose" class="universal-form">
+                                <input type="hidden" class="hidden-input-choose-customer">
+                                <div class="form-group row justify-content-center">
+                                    <label for="recipient-name" class="col-2 col-form-label">Customer: </label>
+                                    <select name="customer id" class="offset-1 offset-sm-0 col-7 custom-select form-control" id="owner-select">
+                                        <option value="" selected>Choose customer.</option>
+                                        <% Customers.forEach(function (customer) {%>
+                                        <option value="<%= customer.customer_id %>" selected><%= customer.surname + " " + customer.name + " " + customer.last_name %></option>
+                                        <% }) %>
+                                    </select>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" id="choose-customer-cancel">Close</button>
+                                    <button type="submit" class="btn btn-primary" id="choose-customer-submit">Create customer</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-body" id="create-customer-body" style="display: none;">
+                            <form id="req-form-customer" class="universal-form">
+                                <input type="hidden" class="hidden-input-create-customer">
+                                <%-partial('../../../../partials/user/form-item')%>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" id="create-customer-cancel">Close</button>
+                                    <button type="submit" class="btn btn-primary" id="create-customer-submit">Create customer</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-body" id="search-deal-body">
                             <%-body -%>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -47,3 +74,5 @@
 </div>
 <script src="/js/ajax/user/control-panel/del-column.js"></script>
 <script src="/js/ajax/column-sort.js"></script>
+<script src="/js/ajax/user/control-panel/create-customer-search.js" ></script>
+<script src="/js/ajax/user/control-panel/change-customer-search.js" ></script>
