@@ -2,6 +2,7 @@ let checkAuthA =  require('../middleware/checkAuth/checkAuthA');
 let checkAuthU = require('../middleware/checkAuth/checkAuthU');
 let ValidateEditForms = require('../middleware/Validate/ValidateEditForms');
 let ValidateObj = require('../middleware/Validate/ValidateObj');
+let ValidateSearchForms = require('../middleware/Validate/ValidateSearchForms')
 let loadUsers = require('../middleware/loadFiles/loadUsers');
 let loadFlats = require('../middleware/loadFiles/loadFlats');
 let loadOwners = require('../middleware/loadFiles/loadOwners');
@@ -51,7 +52,9 @@ module.exports = (app) => {
     app.post('/user/control-panel/add-soldout', require('./user/control-panel/add-soldout').post);
 
     app.get('/user/control-panel/search-rented',loadProfiles, require('./user/control-panel/search-rented').get);
+    app.post('/user/search-rented',ValidateSearchForms, require('./user/control-panel/search-rented').post);
     app.get('/user/control-panel/search-soldout',loadProfiles, require('./user/control-panel/search-soldout').get);
+    app.post('/user/search-soldout',ValidateSearchForms, require('./user/control-panel/search-soldout').post);
 
     app.get('/logout', require('./logout').get);
 

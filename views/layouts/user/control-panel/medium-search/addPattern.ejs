@@ -5,18 +5,26 @@
         <%-partial('../../../../partials/leftNav')%>
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
             <div class="table-responsive">
-                <table class="table table-striped" id="">
+                <table class="table table-striped" id="" style="overflow: hidden;">
                     <thead>
                     <tr>
                         <th class="row justify-content-center">
-                            <button type="button" id="button-search-form" class="btn btn-success btn-sm" data-toggle="modal" data-target="#ModalLong">
+                            <button type="button" id="button-search-form" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#ModalLong">
                                 <i class="fa fa-search" aria-hidden="true"></i>
                             </button>
                         </th>
+                        <% ColumnName.forEach(function (value) {%>
+                        <th>
+                            <%-value[0]%>
+                            <span class="align-middle span-sort" id="span-<%-value[0]%>">
+                                <i class="fa fa-sort" aria-hidden="true"></i>
+                            </span>
+                        </th>
+                        <% }) %>
                     </tr>
                     </thead>
                     <tbody class="tbody-info">
-                    <% var column_number = 1;%>
+
 
                     </tbody>
                 </table>

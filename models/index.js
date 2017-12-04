@@ -29,7 +29,7 @@ Object.keys(db).forEach(modelName => {
         db[modelName].associate(db);
     }
 });
-let sync_argumetn_of = true;
+let sync_argumetn_of = false;
 sequelize.sync({
     force:sync_argumetn_of,
     logging: console.log
