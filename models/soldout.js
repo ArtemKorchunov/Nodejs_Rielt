@@ -19,7 +19,7 @@ module.exports = (sequelize, Datatypes) => {
                 }
             }
         },
-        term_of_lease: {
+        term_of_contract: {
             type: Datatypes.DATEONLY,
             validate: {
                 isAfter: {
@@ -40,7 +40,7 @@ module.exports = (sequelize, Datatypes) => {
     Soldout.associate = (models) => {
         models.Soldout.belongsTo(models.Flat, {foreignKey: {name: "flat_id", allowNull: false}});
         models.Soldout.belongsTo(models.Profile, {foreignKey: {name: "profile_id", allowNull: false}});
-        models.Soldout.belongsTo(models.Customer, {foreignKey: { name: "cust_id"}, onDelete: 'SET NULL'});
+        models.Soldout.belongsTo(models.Customer, {foreignKey: { name: "customer_id"}, onDelete: 'SET NULL'});
     };
     return Soldout;
 };

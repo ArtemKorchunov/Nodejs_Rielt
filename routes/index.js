@@ -50,6 +50,9 @@ module.exports = (app) => {
     app.get('/user/control-panel/add-soldout',joinSoldouts, loadCustomers,loadFlats,loadProfiles, require('./user/control-panel/add-soldout').get);
     app.post('/user/control-panel/add-soldout', require('./user/control-panel/add-soldout').post);
 
+    app.get('/user/control-panel/search-rented',loadProfiles, require('./user/control-panel/search-rented').get);
+    app.get('/user/control-panel/search-soldout',loadProfiles, require('./user/control-panel/search-soldout').get);
+
     app.get('/logout', require('./logout').get);
 
     app.post('/delete/column/:table_name', require('./user/actions/delete-column').post);

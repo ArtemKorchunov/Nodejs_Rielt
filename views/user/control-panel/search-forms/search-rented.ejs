@@ -1,0 +1,48 @@
+<% layout('../../../layouts/user/control-panel/medium-search/addPattern')%>
+<form id="req-form" class="universal-form">
+    <input type="hidden" id="hidden-input-in-form">
+    <div class=" offset-1 col-10 align-self-center">
+        <div class="form-group">
+            <label for="dateInput">Price for month</label>
+            <div class="row ml-0">
+                <input type="number" name="name" id="NameInput" min="0"  placeholder="from" class="form-control col-5">
+                <input type="number" name="surname" id="SurnameInput" min="0"  placeholder="to" class="form-control offset-1 col-6">
+            </div>
+        </div>
+        <div class="form-group ml-1">
+            <label class="custom-control custom-radio">
+                <input id="radio1" name="full time" value="1" type="radio" class="custom-control-input form-control" checked>
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">Full time</span>
+            </label>
+            <label class="custom-control custom-radio">
+                <input id="radio2" name="full time" value="0" type="radio" class="custom-control-input form-control">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">Part time</span>
+            </label>
+        </div>
+        <div class="form-group">
+            <div class="row ml-0">
+                <input type="date" name="name" id="NameInput" placeholder="from" class="form-control col-5 term-date-input">
+                <input type="date" name="surname" id="SurnameInput" placeholder="to" class="form-control offset-1 col-6 term-date-input">
+            </div>
+        </div>
+        <%-partial('../../../partials/user/searchflat-items')%>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" id="universal-submit">Create owner</button>
+    </div>
+</form>
+<script>
+    $("input.custom-control-input").on( "click" , function () {
+        var d = $(this).val()
+        if ($(this).val() === "1")  {
+            $(".term-date-input").attr("disabled", true).val("");
+        } else {
+            $(".term-date-input").removeAttr("disabled");
+        }
+    });
+    $(".term-date-input").attr("disabled", true);
+</script>

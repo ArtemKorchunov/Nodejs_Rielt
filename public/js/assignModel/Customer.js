@@ -3,7 +3,7 @@ module.exports = (items) => {
         return Object.assign(
             {},
             {
-                _id: customer.cust_id,
+                _id: customer.customer_id,
                 passportid: customer.passportid,
                 name: customer.name,
                 surname: customer.surname,

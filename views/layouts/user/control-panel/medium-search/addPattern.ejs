@@ -1,0 +1,41 @@
+<% layout('../../../page')%>
+<% stylesheet('/css/admin.css') %>
+<div class="container-fluid">
+    <div class="row">
+        <%-partial('../../../../partials/leftNav')%>
+        <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
+            <div class="table-responsive">
+                <table class="table table-striped" id="">
+                    <thead>
+                    <tr>
+                        <th class="row justify-content-center">
+                            <button type="button" id="button-search-form" class="btn btn-success btn-sm" data-toggle="modal" data-target="#ModalLong">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </button>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody class="tbody-info">
+                    <% var column_number = 1;%>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal fade" id="ModalLong" tabindex="-1" role="dialog" aria-labelledby="ModalLongTitle" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="ModalLongTitle">Modal title</h5>
+                        </div>
+                        <div class="modal-body">
+                            <%-body -%>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+<script src="/js/ajax/user/control-panel/del-column.js"></script>
+<script src="/js/ajax/column-sort.js"></script>

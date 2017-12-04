@@ -29,7 +29,7 @@ Object.keys(db).forEach(modelName => {
         db[modelName].associate(db);
     }
 });
-let sync_argumetn_of = false;
+let sync_argumetn_of = true;
 sequelize.sync({
     force:sync_argumetn_of,
     logging: console.log
@@ -127,9 +127,9 @@ sequelize.sync({
             db.Soldout.bulkCreate([
                 {
                     price_of_realty: 20000,
-                    term_of_lease: '2018-01-01',
+                    term_of_contract: '2018-01-01',
                     deposit_money: 2000,
-                    cust_id: 1,
+                    customer_id: 1,
                     flat_id: 1,
                     profile_id: 1
                 }

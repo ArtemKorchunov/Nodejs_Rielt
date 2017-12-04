@@ -12,6 +12,8 @@ module.exports = function(req, res, next) {
                 break;
             } else if (key !== "cust id") {
                 validate_obj[key] = info[key];
+            } else {
+                validate_obj[key] = null;
             }
         }
     }

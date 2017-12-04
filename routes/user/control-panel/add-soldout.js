@@ -1,7 +1,7 @@
 exports.get = function(req, res, next) {
     res.render('user/control-panel/forms/add-soldout',
         {
-            ColumnName: [['Price of realty','number'],['Term of lease', 'date'],['Deposit money','number'],['Customer'],['Flat'],['Agent']],
+            ColumnName: [['Price of realty','number'],['Term of contract', 'date'],['Deposit money','number'],['Customer'],['Flat'],['Agent']],
             tableName: req.tableName
         }
     );

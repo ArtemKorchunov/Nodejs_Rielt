@@ -71,10 +71,10 @@
                         }
 
                     } else if (localName === 'select'){
-                        var children_cur_input = current_input.children
+                        var children_cur_input = current_input.children;
                         for (var key in children_cur_input){
                             var this_option = children_cur_input[key];
-                            if (this_option.innerText === current_column.innerText) {
+                            if (this_option.innerText === current_column.innerText || current_column.innerText === 'empty') {
                                 this_option.selected = true;
                                 break;
                             }

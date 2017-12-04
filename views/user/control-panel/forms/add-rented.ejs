@@ -28,7 +28,7 @@
         <select name="cust id" class="offset-1 offset-sm-0 col-7 custom-select form-control" id="owner-select">
             <option value="" selected>Choose customer.</option>
             <% Customers.forEach(function (customer) {%>
-            <option value="<%= customer.cust_id %>"><%= customer.surname + " " + customer.name + " " + customer.last_name %></option>
+            <option value="<%= customer.customer_id %>"><%= customer.surname + " " + customer.name + " " + customer.last_name %></option>
             <% }) %>
         </select>
     </div>

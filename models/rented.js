@@ -41,7 +41,7 @@ module.exports = (sequelize, Datatypes) => {
     Rented.associate = (models) => {
         models.Rented.belongsTo(models.Flat, {foreignKey: {name: "flat_id" ,allowNull: false}});
         models.Rented.belongsTo(models.Profile, {foreignKey: {name: "profile_id" ,allowNull: false}});
-        models.Rented.belongsTo(models.Customer, {foreignKey: { name: "cust_id", allowNull: false}, onDelete: 'CASCADE'});
+        models.Rented.belongsTo(models.Customer, {foreignKey: { name: "customer_id", allowNull: false}, onDelete: 'CASCADE'});
     };
     return Rented;
 };

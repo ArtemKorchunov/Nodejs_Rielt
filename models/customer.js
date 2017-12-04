@@ -1,6 +1,6 @@
 module.exports = (sequelize, Datatypes) => {
     let Customer = sequelize.define("Customer", {
-        cust_id: {
+        customer_id: {
             type: Datatypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
@@ -56,8 +56,8 @@ module.exports = (sequelize, Datatypes) => {
         }
     });
     Customer.associate = (models) => {
-        models.Customer.hasMany(models.Soldout, {foreignKey: { name: "cust_id"}});
-        models.Customer.hasMany(models.Rented, {foreignKey: { name: "cust_id"}});
+        models.Customer.hasMany(models.Soldout, {foreignKey: { name: "customer_id"}});
+        models.Customer.hasMany(models.Rented, {foreignKey: { name: "customer_id"}});
     };
     return Customer;
 };
