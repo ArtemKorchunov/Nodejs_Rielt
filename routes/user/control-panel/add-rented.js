@@ -20,6 +20,6 @@ exports.post = (req, res, next) => {
             }
         )
     } else {
-        res.status(403).send({message: 'All fields except customer must be completed!'});
+        res.status(403).send({message: 'All fields must be completed!'});
     }
 };

@@ -1,5 +1,5 @@
 module.exports = (sequelize, Datatypes) => {
-    var Rented = sequelize.define("Rented", {
+    let Rented = sequelize.define("Rented", {
         rented_id: {
             type: Datatypes.INTEGER,
             primaryKey: true,
@@ -36,6 +36,23 @@ module.exports = (sequelize, Datatypes) => {
         full_time: {
             type: Datatypes.ENUM("1","0"),
             allowNull: false
+        }
+    }, {
+        hooks: {
+            beforeCreate : (instance, options) => {
+                if (Number(instance.full_time)){
+                    instance.term_of_rented = null;
+                } else if (!instance.term_of_rented){
+                    throw {errors: [{message: 'If you are choosing part time, please write down the date!', path: 'add-rented'}]};
+                }
+            },
+            beforeUpdate:(instance, options) => {
+                if (Number(instance.full_time)){
+                    instance.term_of_rented = null;
+                } else if (!instance.term_of_rented){
+                    throw {errors: [{message: 'If you are choosing part time, please write down the date!', path: 'add-rented'}]};
+                }
+            }
         }
     });
     Rented.associate = (models) => {

@@ -11,7 +11,7 @@ module.exports = (sequelize, Datatypes) => {
             unique: true,
             validate: {
                 is: {
-                    args: ["^(([A-Z]{2})|([А-Я]{2})){1}[1-9]{6}$",'ig'],
+                    args: ["^(([A-Z]{2})|([А-Я]{2}))[1-9][0-9]{5}$",'ig'],
                     msg: 'The format of passport must be like AA111111'
                 }
             }

@@ -7,13 +7,11 @@ module.exports = function(req, res, next) {
     req['all_filled'] = true;
     if ((req.url.indexOf('add-rented') + 1) || (req.url.indexOf('add-soldout') + 1)){
         for (let key in info){
-            if (info[key] === "" && key !== "customer id") {
+            if (info[key] === "") {
                 req['all_filled'] = false;
                 break;
-            } else if (key !== "customer id") {
-                validate_obj[key] = info[key];
             } else {
-                validate_obj[key] = null;
+                validate_obj[key] = String(info[key]) !== "null" ? info[key] : null;
             }
         }
     }

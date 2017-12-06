@@ -4,7 +4,7 @@ module.exports = (req,res,next) => {
         items => {
             //todo refactor this
                 res.locals.Profiles = items;
-            next();
+                next();
         },
         err => {
             next()

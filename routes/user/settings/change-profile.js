@@ -11,7 +11,7 @@ exports.post = function (req, res, next) {
     let models  = req.app.get('models');
     var Profile = models.Profile.build();
     var current_user = req.user;
-    Profile.createUserProfile(req.body.validate_obj,current_user, function (err, profile) {
+    Profile.createUserProfile(req.body.validate_obj,current_user,models, function (err, profile) {
         if (profile === undefined) {
             let message = err.errors[0].message;
             res.status(403).send({message: message});

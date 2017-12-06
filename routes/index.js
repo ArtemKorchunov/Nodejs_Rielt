@@ -2,7 +2,7 @@ let checkAuthA =  require('../middleware/checkAuth/checkAuthA');
 let checkAuthU = require('../middleware/checkAuth/checkAuthU');
 let ValidateEditForms = require('../middleware/Validate/ValidateEditForms');
 let ValidateObj = require('../middleware/Validate/ValidateObj');
-let ValidateSearchForms = require('../middleware/Validate/ValidateSearchForms')
+let ValidateSearchForms = require('../middleware/Validate/ValidateSearchForms');
 let loadUsers = require('../middleware/loadFiles/loadUsers');
 let loadFlats = require('../middleware/loadFiles/loadFlats');
 let loadOwners = require('../middleware/loadFiles/loadOwners');
@@ -55,6 +55,10 @@ module.exports = (app) => {
     app.post('/user/search-rented',ValidateSearchForms, require('./user/control-panel/search-rented').post);
     app.get('/user/control-panel/search-soldout',loadProfiles,loadCustomers, require('./user/control-panel/search-soldout').get);
     app.post('/user/search-soldout',ValidateSearchForms, require('./user/control-panel/search-soldout').post);
+
+    app.get('/user/control-panel/report-generator', require('./user/control-panel/report-generator').get);
+    app.post('/print/summary-deal',loadProfile, require('./user/control-panel/printSummary-deal').post);
+    app.post('/print/amount-loc',loadProfile, require('./user/control-panel/printAmount-loc').post);
 
     app.get('/logout', require('./logout').get);
 

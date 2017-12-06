@@ -1,5 +1,4 @@
-var replace = require('../../public/js/replace.js').replace_objPurpes_PlusToLower;
-
+let replace = require('../../public/js/replace.js').replace_objPurpes_PlusToLower;
 
 module.exports = function(req, res, next) {
     if (req['all_filled']) {

@@ -27,6 +27,7 @@
         <label for="recipient-name" class="col-2 col-form-label">Customer: </label>
         <select name="customer id" class="offset-1 offset-sm-0 col-7 custom-select form-control" id="owner-select">
             <option value="" selected>Choose customer.</option>
+            <option value="null">empty</option>
             <% Customers.forEach(function (customer) {%>
             <option value="<%= customer.customer_id %>"><%= customer.surname + " " + customer.name + " " + customer.last_name %></option>
             <% }) %>

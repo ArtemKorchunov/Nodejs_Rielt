@@ -1,18 +1,11 @@
 module.exports = function(req, res, next) {
-    var info = req.body;
-    var validate_obj = {};
-    for (var key in info){
-        if (info[key] === "" && key !== "customer id") {
+    let info = req.body;
+    let validate_obj = {};
+    for (let key in info){
+        if (info[key] === "") {
             delete req.body[key];
-        } else if (key !== "customer id") {
-            validate_obj[key] = info[key];
         } else {
-            if (!info['customer id']) {
-                validate_obj[key] = null;
-            } else {
-                validate_obj[key] = info[key]
-            }
-
+            validate_obj[key] = String(info[key]) !== "null" ? info[key] : null;
         }
     }
     req['notall_filled'] = true;

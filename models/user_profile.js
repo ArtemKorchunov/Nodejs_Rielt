@@ -57,9 +57,9 @@ module.exports = (sequelize, Datatypes) => {
             }
         },
         instanceMethods: {
-            createUserProfile: (profile, user, cb) => {
+            createUserProfile: (profile, user,models, cb) => {
                 let username = user.username;
-                User_profile.findOne({user_username: username}).then(item => {
+                models.Profile.findOne({ where: {user_username: username}}).then(item => {
                     if (!item || item.length === 0) {
                         User_profile.create(profile).then(
                             user_profile => {

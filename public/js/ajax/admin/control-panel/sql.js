@@ -19,7 +19,9 @@ $('form#req-form').on('submit', function() {
                 for (var key in success.result[0]){
                     th += "\n<th>" + key + "</th>"
                 }
-                $('#tr-header').append(th);
+                var tr_header = $('#tr-header');
+                tr_header.children().remove();
+                tr_header.append(th);
                 success.result.forEach(function (item) {
                     tr += "\n<tr>";
                     for (var key in item){
@@ -27,7 +29,9 @@ $('form#req-form').on('submit', function() {
                     }
                     tr += "\n</tr>"
                 });
-                $('#tbody').append(tr)
+                var tbody = $('#tbody');
+                tbody.children().remove();
+                tbody.append(tr);
             },
             403: function(jqXHR) {
                 $('form').attr('id', 'req-form').append(

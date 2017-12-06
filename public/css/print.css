@@ -1,0 +1,62 @@
+a {
+    text-decoration: none !important;
+}
+.nav-print {
+    list-style: none;
+    padding: 0;
+    margin: 30px;
+    width: 50px;
+    opacity: .5;
+}
+
+.nav-print:hover {
+    opacity: 1;
+}
+.nav-print li {
+    height: 50px;
+    width: 50px;
+    overflow: hidden;
+    transition: width .2s ease-in-out, height .2s ease-in-out .2s;
+}
+
+.nav-print li:hover {
+    width: 200px;
+    height: 175px;
+}
+
+.nav-print li a {
+    display: block;
+    width: 200px;
+    height: 40px;
+    line-height: 40px;
+    background: #bbb;
+    margin: 1px;
+    color: #fff;
+    padding-left: 20px;
+    transition: background .2s ease-in-out;
+}
+
+.nav-print li a:hover {
+    background: #2fc5ff
+}
+.nav-print li a:first-child {
+    font-size: 1.1em;
+    height: 50px;
+    line-height: 50px;
+    position: relative;
+    text-indent: 36px;
+}
+
+.nav-print li a:first-child::before{
+    width: 30px;
+    height: 30px;
+    display: block;
+    position: absolute;
+    content: '';
+    top: 9px;
+    left: 9px;
+
+}
+.print a:first-child::before {
+    background: url(printer-.png) center no-repeat;
+}
