@@ -36,13 +36,13 @@ $('form#req-form').on('submit', function() {
                         }
                         tr += "\n</tr>"
                     });
-                    $('#tbody').append(tr)
+                    $('#tbody').append(tr);
                     var search_i = $('.fa-search');
                     search_i.removeClass('fa-search').addClass('fa-refresh');
                     var button_parent_search_i = search_i.parent();
                     button_parent_search_i.attr({'data-toggle': '', 'data-target': ''});
                     button_parent_search_i.click(function () {
-                            var model = $(this).hasClass('soldout') ? 'search-soldout' : 'search-rented';
+                            var model = $(this).hasClass('Soldout') ? 'search-soldout' : 'search-rented';
                             location.href = '/user/control-panel/' + model;
                     });
                     $('.btn-handshake').click(function () {

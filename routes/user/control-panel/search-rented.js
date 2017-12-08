@@ -13,6 +13,11 @@ exports.get = function(req, res, next) {
 exports.post = function (req, res, next) {
     let models = req.app.get('models');
     let obj = req.body['validate_obj'];
+    if (obj['full_time'].$like == "%1%"){
+        obj['term_of_rented'] = {
+            $eq : null
+        }
+    }
     models.Rented.findAll(
         {
             where: {

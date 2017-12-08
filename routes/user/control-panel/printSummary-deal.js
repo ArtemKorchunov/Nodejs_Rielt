@@ -8,16 +8,9 @@ exports.post = (req,res,next) => {
                 $ne: null
             }
         }, attributes: ['name','surname','pc_from_deal'],
+        group: ['name','surname', 'pc_from_deal'],
         include: [
             {model: models.Soldout, attributes: [[sequelize.fn('SUM',sequelize.literal(`${sequelize.col('price_of_realty').col} * ${Profile.sequelize.col('pc_from_deal').col}*0.01`)),'sum_soldout_deals']],
-                group: 'profile_id',
-                where:{
-                    'customer_id': {
-                        $ne: null
-                    }
-                }
-            },
-            {model: models.Rented, attributes: [[sequelize.fn('SUM',sequelize.literal(`${sequelize.col('price_for_month').col} * 0.5`)),'sum_soldout_deals']],
                 group: 'profile_id',
                 where:{
                     'customer_id': {
@@ -28,7 +21,19 @@ exports.post = (req,res,next) => {
         ]
     }).then(
         result => {
-            res.send({})
+            result = result.map(item => {
+                return Object.assign(
+                    {},
+                    {
+                        name: item.name,
+                        surname: item.surname,
+                        pc_from_deal: item.pc_from_deal,
+                        sum_soldout_deals: item.Soldouts? Math.floor(Number(item.Soldouts[0].get('sum_soldout_deals'))) : 'empty'
+                    }
+                )
+            });
+            let resul = JSON.stringify(result);
+            res.json(resul)
         },
         err => {
             res.send({})

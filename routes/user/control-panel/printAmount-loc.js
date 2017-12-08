@@ -7,7 +7,8 @@ exports.post = (req,res,next) => {
         group: 'work_location'
     }).then(
         result => {
-            res.send({})
+            let resul = JSON.stringify(result);
+            res.json(resul)
         },
         err => {
             res.send({})
