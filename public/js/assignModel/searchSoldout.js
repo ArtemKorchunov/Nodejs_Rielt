@@ -9,11 +9,12 @@ module.exports = (items) => {
                 deposit_money: search_soldout.deposit_money,
                 'city': search_soldout['Flat.city'],
                 'street': search_soldout['Flat.street'],
+                'building': search_soldout['Flat.building'],
                 'room_amount': search_soldout['Flat.room_amount'],
                 'stage': search_soldout['Flat.stage'],
                 'total_floors': search_soldout['Flat.total_floors'],
                 'size': search_soldout['Flat.size'],
-                'profile id':`${search_soldout['Profile.name']} ${search_soldout['Profile.surname']}`
+                'profile id':`${search_soldout['Profile.name']} ${search_soldout['Profile.surname']}`,
             }
         )
     });

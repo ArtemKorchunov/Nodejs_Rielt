@@ -6,6 +6,7 @@ module.exports = (items) => {
                 _id: flat.flat_id,
                 city: flat.city,
                 street: flat.street,
+                building: flat.building,
                 flat: flat.flat,
                 room_amount: flat.room_amount,
                 stage: flat.stage,

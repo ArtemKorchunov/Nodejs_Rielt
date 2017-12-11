@@ -18,8 +18,17 @@ module.exports = (sequelize, Datatypes) => {
             type: Datatypes.STRING(25),
             validate: {
                 is: {
-                    args: ["^([a-z]|[а-я]){2,20}$",'i'],
-                    msg:  'Street name must be higher than 1 symbol and lower 21'
+                    args: ["^.{2,25}$",'i'],
+                    msg:  'Street name must be higher than 1 symbol and lower 25'
+                }
+            }
+        },
+        building: {
+            type: Datatypes.STRING(25),
+            validate: {
+                is: {
+                    args: ["^.{2,25}$",'i'],
+                    msg:  'Street name must be higher than 1 symbol and lower 25'
                 }
             }
         },
@@ -27,7 +36,7 @@ module.exports = (sequelize, Datatypes) => {
             type: Datatypes.STRING(25),
             validate: {
                 is: {
-                    args: ["^[1-9][0-9]{1,6}([a-z]|[а-я]){0,20}$",'i'],
+                    args: ["^[1-9][0-9]{0,6}([a-z]|[а-я]){0,20}$",'i'],
                     msg:  'Flat name must be higher than 1 symbol and lower 21'
                 }
             }

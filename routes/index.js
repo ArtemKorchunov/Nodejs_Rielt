@@ -23,6 +23,7 @@ module.exports = (app) => {
     app.get('/', require('./main').get);
     app.get('/login', require('./login').get);
     app.post('/login', require('./login').post);
+    app.post('/get-table/:table_name/:id', require('./get-column').post);
 
     app.get('/admin', require('./admin/admin').get);
     app.post('/admin', require('./admin/admin').post);

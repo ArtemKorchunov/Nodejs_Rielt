@@ -7,7 +7,7 @@ module.exports = (models, options = []) => {
             order: options,
             include: [
                 {model: models.Customer, attributes: ['surname', 'name', 'last_name']},
-                {model: models.Flat, attributes: ['city', 'street', 'flat']},
+                {model: models.Flat, attributes: ['city', 'street', 'building', 'flat']},
                 {model: models.Profile, attributes: ['name', 'surname']}
             ]
             ,raw : true

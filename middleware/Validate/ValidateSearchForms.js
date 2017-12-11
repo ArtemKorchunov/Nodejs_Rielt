@@ -1,5 +1,8 @@
 module.exports = function(req, res, next) {
     var info = req.body;
+    var profile_id = info['profile id'];
+    delete info['profile id'];
+    info['profile_id'] = profile_id;
     var validate_obj = {};
     let index_val;
     for (let key in info){

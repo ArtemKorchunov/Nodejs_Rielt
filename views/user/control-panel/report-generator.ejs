@@ -5,7 +5,7 @@
     <div class="row">
         <%-partial('../../partials/leftNav')%>
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
-            <div class="btn-group" id="print-btn-click">
+            <div class="btn-group inprint-vanish" id="inprint-vanish">
                 <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-print mr-2" aria-hidden="true"></i>Print
                 </button>
@@ -15,7 +15,7 @@
                     <a class="dropdown-item" id="print-amount-loc" href="#">Separated link</a>
                 </div>
             </div>
-            <div class="table-responsive" id="div-table-print" style="display: none">
+            <div class="table-responsive print-content" id="print-content" style="display: none">
                 <table class="table table-striped search-name" id="" style="">
                     <thead>
                         <tr id="tr-header">
@@ -33,34 +33,5 @@
     </div>
 </div>
 
-<script type="text/javascript">
-    (function() {
-
-        var beforePrint = function() {
-            $("#div-table-print").css('display','block');
-            $("#print-btn-click").css('display','none');
-            //console.log('Functionality to run before printing.');
-        };
-
-        var afterPrint = function() {
-            $("#div-table-print").css('display','none');
-            $("#print-btn-click").css('display','block');
-            //console.log('Functionality to run after printing');
-        };
-
-        if (window.matchMedia) {
-            var mediaQueryList = window.matchMedia('print');
-            mediaQueryList.addListener(function(mql) {
-                if (mql.matches) {
-                    beforePrint();
-                } else {
-                    afterPrint();
-                }
-            });
-        }
-
-        window.onbeforeprint = beforePrint;
-        window.onafterprint = afterPrint;
-    }());
-</script>
+<script src="/js/print-toggle.js"></script>
 <script src="/js/ajax/user/control-panel/print.js"></script>
