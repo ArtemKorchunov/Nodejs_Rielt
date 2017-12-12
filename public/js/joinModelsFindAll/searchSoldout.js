@@ -1,8 +1,8 @@
-module.exports = (models, obj = {}, offset = 0) => {
+module.exports = (models, obj = {}) => {
     return models.Soldout.findAll(
         {
-            offset: offset,
             where: {
+                'soldout_id': obj['soldout_id'] && obj['soldout_id'].$notIn && !!obj['soldout_id'].$notIn.length ? obj['soldout_id']: {$gte:0},
                 'customer_id': null,
                 'deposit_money': obj['deposit_money'] ? obj['deposit_money'] : {$gte: 0},
                 'price_of_realty': obj['price_of_realty'] ? obj['price_of_realty'] : {$gte: 0},

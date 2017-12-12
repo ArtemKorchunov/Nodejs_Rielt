@@ -24,11 +24,18 @@ module.exports = (req, res, next) => {
                 let req = res.req;
                 let models = req.app.get('models');
                 let query = req.query;
-                let offset = matches.length;
+                let arr_id = [];
+                for (let key in matches){
+                    arr_id.push(matches[key].soldout_id)
+                }
+                query['validate_obj'].rented_id = {$notIn: arr_id};
+                let offset = res.locals.offset0;
                 relatedMatches(offset,query,models,res).then(
                     result => {
                         res.locals.searched = true;
-                        matches = Array.from(matches,result[0],result[1]);
+                        for (let res_key in result){
+                            matches.push(result[res_key]);
+                        }
                         res.locals.matches_cols = assignSearchRented(dateConvert(matches));
                         next();
                     }

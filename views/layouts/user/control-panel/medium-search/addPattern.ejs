@@ -53,23 +53,27 @@
                     </tr>
                     </thead>
                     <tbody class="tbody-info" id="tbody">
-                    <% var i = 0; var match_level = "";%>
+                    <% var i = 0;%>
+                    <% var match_level = "";%>
                     <% matches_cols.forEach( function (item) { %>
-                    <tr id="<%= type + '-' + item._id %>">
+                        <% if (offset0 != undefined && offset1 != undefined){%>
+                            <% if ( i >= offset0 && i <= offset1){%>
+                                <% match_level = "alert-warning"%>
+                            <%} else if (i > offset1){%>
+                                <% match_level = "alert-danger"%>
+                            <%}%>
+                        <%}%>
+
+                    <tr id="<%= type + '-' + item._id %>" class="<%= match_level%>">
                         <td>
                             <button type="button" id="button-handshake-form" class="btn btn-success btn-sm btn-handshake" data-toggle="modal" data-target="#ModalLong">
                                  <i class="fa fa-handshake-o" aria-hidden="true"></i>
                             </button>
                         </td>
-                        <% if (offset1 && offset0){%>
-                        <% if ( i > offset0 && i <= offset1){%>
-                            <% match_level = "alert-warning"%>
-                        <%} else if (i > offset1){%>
-                            <% match_level = "alert-danger"%>
-                        <%}}%>
+
                         <%for (var key in item) {%>
                             <%if (key !== "_id") {%>
-                                <td class="<%=match_level%>">
+                                <td class="">
                                 <%=item[key]%>
                                 </td>
                             <%}%>

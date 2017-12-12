@@ -1,8 +1,8 @@
-module.exports = (models, obj = {}, offset = 0) => {
+module.exports = (models, obj = {}) => {
     return models.Rented.findAll(
         {
-            offset: offset,
             where: {
+                'rented_id': obj['rented_id'] && obj['rented_id'].$notIn && !!obj['rented_id'].$notIn.length ? obj['rented_id']: {$gte:0},
                 'customer_id': null,
                 'price_for_month': obj['price_for_month'] ? obj['price_for_month'] : {$gte: 0},
                 'full_time': obj['full_time'] ? obj['full_time'] : {$gte: 0},
