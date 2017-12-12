@@ -11,6 +11,9 @@ let loadProfiles = require('../middleware/loadFiles/loadProfiles');
 let loadProfile = require('../middleware/loadFiles/loadProfile');
 let ReplaceMethod = require('../middleware/Validate/Replace-method');
 
+let pickRented = require('../middleware/Picking/pickRented');
+let pickSoldout = require('../middleware/Picking/pickSoldout');
+
 let joinFlats = require('../middleware/joinFiles/joinFlats');
 let joinRenteds = require('../middleware/joinFiles/joinRenteds');
 let joinSoldouts = require('../middleware/joinFiles/joinSoldouts');
@@ -23,7 +26,7 @@ module.exports = (app) => {
     app.get('/', require('./main').get);
     app.get('/login', require('./login').get);
     app.post('/login', require('./login').post);
-    app.post('/get-table/:table_name/:id', require('./get-column').post);
+    app.get('/get-table/:table_name/:id', require('./get-column').get);
 
     app.get('/admin', require('./admin/admin').get);
     app.post('/admin', require('./admin/admin').post);
@@ -52,10 +55,9 @@ module.exports = (app) => {
     app.get('/user/control-panel/add-soldout',joinSoldouts, loadCustomers,loadFlats,loadProfiles, require('./user/control-panel/add-soldout').get);
     app.post('/user/control-panel/add-soldout', require('./user/control-panel/add-soldout').post);
 
-    app.get('/user/control-panel/search-rented',loadProfiles,loadCustomers, require('./user/control-panel/search-rented').get);
-    app.post('/user/search-rented',ValidateSearchForms, require('./user/control-panel/search-rented').post);
-    app.get('/user/control-panel/search-soldout',loadProfiles,loadCustomers, require('./user/control-panel/search-soldout').get);
-    app.post('/user/search-soldout',ValidateSearchForms, require('./user/control-panel/search-soldout').post);
+    app.get('/user/control-panel/search-rented',loadProfiles,loadCustomers,ValidateSearchForms,pickRented, require('./user/control-panel/picking-flat/search-rented').get);
+    app.get('/user/control-panel/search-soldout', loadProfiles,loadCustomers,ValidateSearchForms,pickSoldout, require('./user/control-panel/picking-flat/search-soldout').get);
+
 
     app.get('/user/control-panel/report-generator', require('./user/control-panel/report-generator').get);
     app.post('/print/summary-deal',loadProfile, require('./user/control-panel/printSummary-deal').post);

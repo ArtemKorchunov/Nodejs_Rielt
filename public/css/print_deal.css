@@ -26,3 +26,17 @@
 .name-h5 {
     margin-bottom: 20px !important;
 }
+
+#more-results-wrapper {
+    align-items: baseline;
+    font-size: 19px;
+}
+.more-results-td{
+    color: #0275d8;
+}
+.more-results-td:hover{
+    transition: all .3s;
+    background-color: #0275d8;
+    cursor: pointer;
+    color: white;
+}

@@ -7,7 +7,7 @@ assignObj['Rented'] = require('../public/js/assignModel/getColumnRented');
 
 let dateConvert = require("../lib/dateConvert");
 
-exports.post = function (req, res, next) {
+exports.get = function (req, res, next) {
     let model = req.params.table_name;
     let id = req.params.id;
     let id_name = model.toLowerCase() + '_id';

@@ -1,5 +1,6 @@
 var dateConvert = require("../../lib/dateConvert");
 let assignOwner = require('../../public/js/assignModel/Owner');
+
 module.exports = (req, res, next) => {
     let models  = req.app.get('models');
     let this_model = models.Owner;

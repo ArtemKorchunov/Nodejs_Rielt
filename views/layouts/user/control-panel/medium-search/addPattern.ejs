@@ -27,12 +27,17 @@
 
             </div>
             <div class="table-responsive inprint-vanish" id="table_wrapper">
-                <table class="table table-striped search-name" id="<%= tableName%>" style="min-width: 1300px;">
+                <table class="table search-name" id="<%= tableName%>" style="min-width: 1300px;">
                     <thead>
                     <tr>
                         <th class="row justify-content-center">
+                            <% if (!searched) {%>
                             <button type="button" id="button-search-form" class="btn btn-primary btn-sm <%= tableName%>" data-toggle="modal" data-target="#ModalLong">
                                 <i class="fa fa-search" aria-hidden="true"></i>
+                                <%} else {%>
+                            <button type="button" id="button-search-form" class="btn btn-primary btn-sm <%= tableName%>" data-toggle="" data-target="">
+                                <i class="fa fa-refresh" aria-hidden="true"></i>
+                                <% }%>
                             </button>
                         </th>
                         <% ColumnName.forEach(function (value) {%>
@@ -48,8 +53,43 @@
                     </tr>
                     </thead>
                     <tbody class="tbody-info" id="tbody">
+                    <% var i = 0; var match_level = "";%>
+                    <% matches_cols.forEach( function (item) { %>
+                    <tr id="<%= type + '-' + item._id %>">
+                        <td>
+                            <button type="button" id="button-handshake-form" class="btn btn-success btn-sm btn-handshake" data-toggle="modal" data-target="#ModalLong">
+                                 <i class="fa fa-handshake-o" aria-hidden="true"></i>
+                            </button>
+                        </td>
+                        <% if (offset1 && offset0){%>
+                        <% if ( i > offset0 && i <= offset1){%>
+                            <% match_level = "alert-warning"%>
+                        <%} else if (i > offset1){%>
+                            <% match_level = "alert-danger"%>
+                        <%}}%>
+                        <%for (var key in item) {%>
+                            <%if (key !== "_id") {%>
+                                <td class="<%=match_level%>">
+                                <%=item[key]%>
+                                </td>
+                            <%}%>
+                        <%}%>
+                    </tr>
+                    <% i++; %>
+                    <%})%>
+                    <% if (matches_cols.length) {%>
+                    <tr>
+                        <td colspan="12" class="more-results-td">
+                            <div class="row justify-content-center align-middle" id="more-results-wrapper">
+                                <i class="fa fa-long-arrow-down align-middle" aria-hidden="true"></i>
+                                <div class="more-results-text ml-1">Related queries</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <%}%>
                     </tbody>
                 </table>
+
             </div>
             <div class="modal fade" id="ModalLong" tabindex="-1" role="dialog" aria-labelledby="ModalLongTitle" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -94,6 +134,7 @@
         </main>
     </div>
 </div>
+<script src="/js/search-func.js"></script>
 <script src="/js/date-convert.js"></script>
 <script src="/js/ajax/user/control-panel/del-column.js"></script>
 <script src="/js/ajax/column-sort.js"></script>

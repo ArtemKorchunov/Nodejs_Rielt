@@ -15,7 +15,7 @@ $('form#req-form-choose').on('submit', function(table) {
                 $('#' + tableName.toLowerCase() + '-' + id).remove();
                 $.ajax({
                     url: "/get-table/" + tableName + '/' + id,
-                    method: "POST",
+                    method: "GET",
                     data: '',
                     statusCode: {
                         200: function (success) {
