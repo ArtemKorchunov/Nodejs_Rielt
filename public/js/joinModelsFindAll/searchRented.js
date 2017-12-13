@@ -1,6 +1,7 @@
 module.exports = (models, obj = {}) => {
     return models.Rented.findAll(
         {
+            order: [['price_for_month','ASC']],
             where: {
                 'rented_id': obj['rented_id'] && obj['rented_id'].$notIn && !!obj['rented_id'].$notIn.length ? obj['rented_id']: {$gte:0},
                 'customer_id': null,

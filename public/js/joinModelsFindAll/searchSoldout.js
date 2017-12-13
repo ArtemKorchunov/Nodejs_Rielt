@@ -1,6 +1,7 @@
 module.exports = (models, obj = {}) => {
     return models.Soldout.findAll(
         {
+            order: [['price_of_realty','ASC']],
             where: {
                 'soldout_id': obj['soldout_id'] && obj['soldout_id'].$notIn && !!obj['soldout_id'].$notIn.length ? obj['soldout_id']: {$gte:0},
                 'customer_id': null,
