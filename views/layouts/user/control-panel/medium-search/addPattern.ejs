@@ -1,0 +1,137 @@
+<% layout('../../../page')%>
+<% stylesheet('/css/admin.css') %>
+<% stylesheet('/css/print_deal.css') %>
+<div class="container-fluid">
+    <div class="row">
+        <%-partial('../../../../partials/leftNav')%>
+        <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
+            <div class="print-content" id="print-wrapper">
+                <div class="row justify-content-center" id="title-contract-print">
+                    <div class="h2"><span id="title-contract">Option to <span class="service-contract">buy</span> agreement</span></div>
+                </div>
+                <div class="col justify-content-start">
+                    <p class="lead">This option to <span class="service-contract">buy</span> is made and effective at <span id="date-contract"></span></p>
+                    <div class="h5 name-h5" >Owner: <span id="owner-contract"></span ></div>
+                    <div class="h5 name-h5">Customer: <span id="customer-contract"></span></div>
+                    <ol class="ol-deal-print">
+                        <li class="li-deal-print">Buyer hereby pays to Owner the sum of - <span id="price-contract"></span></li>
+                        <li class="li-deal-print">For the realty which is situated:<br> <span id="address-contract"></span></li>
+                        <li class="li-deal-print">With the agreement Customer agreed to take a deposit money in the amount of <span id="deposit-contract"></span></li>
+                    </ol>
+                    <div class="w-35">
+                        <p class="lead signature">Owner signature</p>
+                        <p class="lead signature">Real estate agency: "YOUR RIELTOR"</p>
+                        <p class="lead signature">Buyer signature</p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="table-responsive inprint-vanish" id="table_wrapper">
+                <table class="table search-name" id="<%= tableName%>" style="min-width: 1300px;">
+                    <thead>
+                    <tr>
+                        <th class="row justify-content-center">
+                            <% if (!searched) {%>
+                            <button type="button" id="button-search-form" class="btn btn-primary btn-sm <%= tableName%>" data-toggle="modal" data-target="#ModalLong">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                                <%} else {%>
+                            <button type="button" id="button-search-form" class="btn btn-primary btn-sm <%= tableName%>" data-toggle="" data-target="">
+                                <i class="fa fa-refresh" aria-hidden="true"></i>
+                                <% }%>
+                            </button>
+                        </th>
+                        <% ColumnName.forEach(function (value) {%>
+                        <% if (value.length !== 2){%>
+                        <th>
+                            <%-value[0]%>
+                            <span class="align-middle span-sort" id="span-<%-value[0]%>">
+
+                            </span>
+                        </th>
+                        <% }%>
+                        <% }) %>
+                    </tr>
+                    </thead>
+                    <tbody class="tbody-info" id="tbody">
+                    <% var i = 0;%>
+                    <% var match_level = "";%>
+                    <% matches_cols.forEach( function (item) { %>
+                        <% if (offset0 != undefined && offset1 != undefined){%>
+                            <% if ( i >= offset0 && i <= offset1){%>
+                                <% match_level = "alert-warning"%>
+                            <%} else if (i > offset1){%>
+                                <% match_level = "alert-danger"%>
+                            <%}%>
+                        <%}%>
+
+                    <tr id="<%= type + '-' + item._id %>" class="<%= match_level%>">
+                        <td>
+                            <button type="button" id="button-handshake-form" class="btn btn-success btn-sm btn-handshake" data-toggle="modal" data-target="#ModalLong">
+                                 <i class="fa fa-handshake-o" aria-hidden="true"></i>
+                            </button>
+                        </td>
+
+                        <%for (var key in item) {%>
+                            <%if (key !== "_id") {%>
+                                <td class="">
+                                <%=item[key]%>
+                                </td>
+                            <%}%>
+                        <%}%>
+                    </tr>
+                    <% i++; %>
+                    <%})%>
+
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="modal fade" id="ModalLong" tabindex="-1" role="dialog" aria-labelledby="ModalLongTitle" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="ModalLongTitle">Modal title</h5>
+                        </div>
+                        <div class="modal-body" id="choose-customer-body" style="display: none;">
+                            <form id="req-form-choose" class="universal-form">
+                                <input type="hidden" class="hidden-input-choose-customer">
+                                <div class="form-group row justify-content-center">
+                                    <label for="recipient-name" class="col-2 col-form-label">Customer: </label>
+                                    <select name="customer id" class="offset-1 offset-sm-0 col-7 custom-select form-control" id="owner-select" required>
+                                        <option value="" selected>Choose customer.</option>
+                                        <% Customers.forEach(function (customer) {%>
+                                        <option value="<%= customer.customer_id %>" selected><%= customer.surname + " " + customer.name + " " + customer.last_name %></option>
+                                        <% }) %>
+                                    </select>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" id="choose-customer-cancel">Close</button>
+                                    <button type="submit" class="btn btn-primary" id="choose-customer-submit">Choose customer</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-body" id="create-customer-body" style="display: none;">
+                            <form id="req-form-customer" class="universal-form">
+                                <input type="hidden" class="hidden-input-create-customer">
+                                <%-partial('../../../../partials/user/form-item')%>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" id="create-customer-cancel">Close</button>
+                                    <button type="submit" class="btn btn-primary" id="create-customer-submit">Create customer</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-body" id="search-deal-body">
+                            <%-body -%>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+<script src="/js/search-func.js"></script>
+<script src="/js/date-convert.js"></script>
+<script src="/js/ajax/user/control-panel/del-column.js"></script>
+<script src="/js/ajax/column-sort.js"></script>
+<script src="/js/ajax/user/control-panel/create-customer-search.js" ></script>
+<script src="/js/ajax/user/control-panel/change-customer-search.js" ></script>

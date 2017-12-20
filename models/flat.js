@@ -18,8 +18,17 @@ module.exports = (sequelize, Datatypes) => {
             type: Datatypes.STRING(25),
             validate: {
                 is: {
-                    args: ["^([a-z]|[а-я]){2,20}$",'i'],
-                    msg:  'Street name must be higher than 1 symbol and lower 21'
+                    args: ["^.{2,25}$",'i'],
+                    msg:  'Street name must be higher than 1 symbol and lower 25'
+                }
+            }
+        },
+        building: {
+            type: Datatypes.STRING(25),
+            validate: {
+                is: {
+                    args: ["^.{2,25}$",'i'],
+                    msg:  'Street name must be higher than 1 symbol and lower 25'
                 }
             }
         },
@@ -27,7 +36,7 @@ module.exports = (sequelize, Datatypes) => {
             type: Datatypes.STRING(25),
             validate: {
                 is: {
-                    args: ["^[1-9][0-9]{0,6}([a-z]|[а-я]){2,20}$",'i'],
+                    args: ["^[1-9][0-9]{0,6}([a-z]|[а-я]){0,20}$",'i'],
                     msg:  'Flat name must be higher than 1 symbol and lower 21'
                 }
             }
@@ -37,11 +46,11 @@ module.exports = (sequelize, Datatypes) => {
             validate: {
                 min: {
                     args: 1,
-                    msg: 'room amount must be greater than 0'
+                    msg: 'Room amount must be greater than 0'
                 },
                 max: {
                     args: 8,
-                    msg: 'room amount must be lower than 8'
+                    msg: 'Room amount must be lower than 8'
                 }
             }
         },
@@ -50,11 +59,11 @@ module.exports = (sequelize, Datatypes) => {
             validate: {
                 min: {
                     args: 1,
-                    msg: 'room amount must be greater than 0'
+                    msg: 'Stage amount must be greater than 0'
                 },
                 max: {
                     args: 250,
-                    msg: 'room amount must be lower than 251'
+                    msg: 'Stage amount must be lower than 251'
                 }
             }
         },
@@ -63,11 +72,11 @@ module.exports = (sequelize, Datatypes) => {
             validate: {
                 min: {
                     args: 1,
-                    msg: 'room floors must be greater than 0'
+                    msg: 'Total floors must be greater than 0'
                 },
                 max: {
                     args: 99,
-                    msg: 'room floors must be lower than 100'
+                    msg: 'Total floors must be lower than 100'
                 }
             }
         },
@@ -76,21 +85,25 @@ module.exports = (sequelize, Datatypes) => {
             validate: {
                 min: {
                     args: 8,
-                    msg: 'room floors must be greater than 7'
+                    msg: 'Size floors must be greater than 7'
                 },
                 max: {
                     args: 500,
-                    msg: 'room floors must be lower than 501'
+                    msg: 'Size floors must be lower than 501'
                 }
             }
         },
         service: {
-            type: Datatypes.BOOLEAN,
+            type: Datatypes.ENUM('1','0'),
             allowNull: false
+        }
+    } ,{
+        hooks: {
+
         }
     });
     Flat.associate = (models) => {
-        models.Flat.belongsTo(models.Seller, {foreignKey: {name: "seller_id", allowNull:false}, onDelete: 'CASCADE'});
+        models.Flat.belongsTo(models.Owner, {foreignKey: {name: "owner_id", allowNull:false}, onDelete: 'CASCADE'});
         models.Flat.hasMany(models.Soldout, {foreignKey: {name: "flat_id", allowNull: false}});
         models.Flat.hasMany(models.Rented, {foreignKey: {name: "flat_id", allowNull: false}});
     };

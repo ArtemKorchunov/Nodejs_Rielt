@@ -6,18 +6,19 @@
         <%-partial('../../partials/leftNav')%>
 
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
-            <div class="display-4 border-bottom col-12">Sql queries</div>
-            <div class="btn-group form-w p-2 m-b col-12" role="group" aria-label="Button group with nested dropdown">
-                <div class="btn-group" role="group">
-                    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Common queries
+            <div class="display-4 border-bottom col-12">Sql queries
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Arbitrary requests
                     </button>
-                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                        <a class="dropdown-item" href="#">Dropdown link</a>
-                        <a class="dropdown-item" href="#">Dropdown link</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item 0" href="#">Average soldout</a>
+                        <a class="dropdown-item 1" href="#">Count of contracts</a>
+                        <a class="dropdown-item 2" href="#">Min price</a>
                     </div>
                 </div>
             </div>
+
             <form class="form-w form-group p-2 m-b col-12" id="req-form">
                 <div class="form-group">
                     <input type="text" class="form-control" name="query" style="font-size: 1.5rem;" required>
@@ -43,4 +44,16 @@
         </main>
     </div>
 </div>
+<script>
+    $('.dropdown-item').click(function (e) {
+        var arr_request = [
+            'select ceil(avg(price_of_realty)) as average_sale, f.city as city, f.street as street, f.room_amount from soldouts s join flats f on s.flat_id = f.flat_id group by f.city, f.street, f.room_amount ',
+            'select concat(p.surname, " ", p.name) as agent, ifnull((select count(s.soldout_id) from soldouts s where s.profile_id = p.profile_id group by s.profile_id),0) count_soldouts, ifnull((select count(r.rented_id) from renteds r where r.profile_id = p.profile_id group by r.profile_id),0) count_renteds from profiles p',
+            'select f.city, f.street, (select min(r.price_for_month) from renteds r where r.flat_id = f.flat_id group by f.city, f.street) as min_price, case when f.service="0" then "rented" end as service from flats f group by f.city, f.street having min_price is not null union select f.city, f.street, (select min(s.price_of_realty) from soldouts s where s.flat_id = f.flat_id group by f.city, f.street) as min_price, case when f.service="1" then "soldout" end as service from flats f group by f.city, f.street having min_price is not null'
+        ]
+        var this_request = $(this).attr('class').split(' ')[1];
+        $('input[name=query]').val(arr_request[this_request]);
+        $("#req-form").submit();
+    })
+</script>
 <script src="/js/ajax/admin/control-panel/sql.js"></script>

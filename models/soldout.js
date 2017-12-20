@@ -7,6 +7,7 @@ module.exports = (sequelize, Datatypes) => {
         },
         price_of_realty: {
             type: Datatypes.INTEGER,
+            allowNull: false,
             validate: {
                 min: {
                     args: 1000,
@@ -18,7 +19,7 @@ module.exports = (sequelize, Datatypes) => {
                 }
             }
         },
-        term_of_lease: {
+        term_of_contract: {
             type: Datatypes.DATEONLY,
             validate: {
                 isAfter: {
@@ -31,12 +32,15 @@ module.exports = (sequelize, Datatypes) => {
                 }
             }
         },
-        deposit_money: {type: Datatypes.INTEGER }
+        deposit_money: {
+            type: Datatypes.INTEGER,
+            allowNull: false
+        }
     });
     Soldout.associate = (models) => {
         models.Soldout.belongsTo(models.Flat, {foreignKey: {name: "flat_id", allowNull: false}});
         models.Soldout.belongsTo(models.Profile, {foreignKey: {name: "profile_id", allowNull: false}});
-        models.Soldout.belongsTo(models.Customer, {foreignKey: { name: "cust_id", allowNull: false}, onDelete: 'CASCADE'});
+        models.Soldout.belongsTo(models.Customer, {foreignKey: { name: "customer_id"}, onDelete: 'SET NULL'});
     };
     return Soldout;
 };

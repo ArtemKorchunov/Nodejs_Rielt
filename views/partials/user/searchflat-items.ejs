@@ -1,0 +1,48 @@
+<div class="form-group">
+    <div class="row">
+        <label class="custom-control custom-radio">City</label>
+        <label class="custom-control offset-4 custom-radio">Street</label>
+    </div>
+    <div class="row ml-0">
+        <input type="text" name="city" id="NameInput" placeholder="city" class="form-control col-5 ">
+        <input type="text" name="street" id="SurnameInput" placeholder="street" class="form-control offset-1 col-6">
+    </div>
+</div>
+<div class="form-group">
+    <label for="dateInput">Room amount</label>
+    <div class="row ml-0">
+
+        <input type="number" name="room_amount from" id="NameInput" placeholder="from" min="0" class="form-control col-5 ">
+        <input type="number" name="room_amount to" id="SurnameInput" placeholder="to" min="0" class="form-control offset-1 col-6">
+    </div>
+</div>
+<div class="form-group">
+    <label for="dateInput">Stage</label>
+    <div class="row ml-0">
+        <input type="number" name="stage from" id="NameInput" placeholder="from" min="0" class="form-control col-5 ">
+        <input type="number" name="stage to" id="SurnameInput" placeholder="to" min="0" class="form-control offset-1 col-6">
+    </div>
+</div>
+<div class="form-group">
+    <label for="dateInput">Total floors</label>
+    <div class="row ml-0">
+        <input type="number" name="total_floors from" id="NameInput" placeholder="from" min="0" class="form-control col-5 ">
+        <input type="number" name="total_floors to" id="SurnameInput" placeholder="to" min="0" class="form-control offset-1 col-6">
+    </div>
+</div>
+<div class="form-group">
+    <label for="dateInput">Size</label>
+    <div class="row ml-0">
+        <input type="number" name="size from" id="NameInput" placeholder="from" min="0" class="form-control col-5 ">
+        <input type="number" name="size to" id="SurnameInput" placeholder="to" min="0" class="form-control offset-1 col-6">
+    </div>
+</div>
+<div class="form-group">
+    <label for="recipient-name" class="form-label">Agent: </label>
+    <select name="profile id" class="custom-select form-control" id="owner-select">
+        <option value="" selected>Choose agent.</option>
+        <% Profiles.forEach(function (profile) {%>
+        <option value="<%= profile.profile_id %>"><%= profile.name + " " + profile.surname %></option>
+        <% }) %>
+    </select>
+</div>

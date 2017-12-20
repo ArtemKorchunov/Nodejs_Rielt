@@ -1,0 +1,35 @@
+<% layout('../../../layouts/user/control-panel/medium-search/addPattern')%>
+<form id="req-form" class="universal-form soldout">
+    <input type="hidden" id="hidden-input-in-form">
+    <div class=" offset-1 col-10 align-self-center"  id="wrapper-form">
+        <div class="form-group">
+            <label for="dateInput">Price of realty</label>
+            <div class="row ml-0">
+                <input type="number" name="price_of_realty from" id="NameInput" placeholder="from" min="0" class="form-control col-5">
+                <input type="number" name="price_of_realty to" id="SurnameInput" placeholder="to" min="0" class="form-control offset-1 col-6">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="dateInput">Term of contract</label>
+            <div class="row ml-0">
+                <input type="date" name="term_of_contract from" id="NameInput" placeholder="from" min="0" class="form-control col-5 term-date-input">
+                <input type="date" name="term_of_contract to" id="SurnameInput" placeholder="to" min="0" class="form-control offset-1 col-6 term-date-input">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="dateInput">Deposit money</label>
+            <div class="row ml-0">
+                <input type="number" name="deposit_money from" id="NameInput" placeholder="from" min="0" class="form-control col-5">
+                <input type="number" name="deposit_money to" id="SurnameInput" placeholder="to" min="0" class="form-control offset-1 col-6">
+            </div>
+        </div>
+        <%-partial('../../../partials/user/searchflat-items')%>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id="universal-cancel" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" id="universal-submit" >Create owner</button>
+    </div>
+</form>
+<script src="/js/print-toggle.js"></script>
+<script src="/js/ajax/user/control-panel/search-universal.js" ></script>

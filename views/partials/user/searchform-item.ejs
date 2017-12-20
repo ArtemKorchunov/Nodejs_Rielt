@@ -1,0 +1,11 @@
+<% ColumnName.forEach(function (value) {%>
+<% if (value.length === 2) {%>
+<div class="form-group">
+    <label for="recipient-name" class=""><%-value[0]%></label>
+    <div class="row ml-0">
+        <input type="number" name="name" id="NameInput" placeholder="from" class="form-control col-5">
+        <input type="<%- (value[1]? value[1]: 'text')%>" name="<%-value[0]%>" id="SurnameInput" placeholder="to" class="form-control offset-1 col-6">
+    </div>
+</div>
+<% } %>
+<% }) %>

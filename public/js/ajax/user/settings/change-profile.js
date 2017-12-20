@@ -1,4 +1,4 @@
-$('form').attr('id', 'req-form').on('submit', function() {
+$('form#req-form').on('submit', function() {
     var form = $(this);
     var d = arguments;
     $('.error', form).html('');
@@ -19,9 +19,10 @@ $('form').attr('id', 'req-form').on('submit', function() {
                 document.location.href = "/user/settings/profile";
             },
             403: function(jqXHR) {
-                $('form').attr('id', 'req-form').append(
+                var message = jqXHR.responseJSON.message;
+                $('form#req-form').append(
                     "<div class=\"alert alert-danger\" role=\"alert\">" +
-                    "This is a danger alert—check it out!" +
+                    message +
                     "</div>"
                 );
             }

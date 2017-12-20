@@ -6,13 +6,35 @@ module.exports = (sequelize, Datatypes) => {
             autoIncrement: true
         },
         name: {
-            type: Datatypes.STRING
+            type: Datatypes.STRING(25),
+            validate: {
+                is: {
+                    args: ["^([a-z]|[а-я]){2,15}$",'i'],
+                    msg:  'User name must be higher than 1 symbol and lower 16'
+                }
+            }
         },
         surname: {
-            type: Datatypes.STRING
+            type: Datatypes.STRING(25),
+            validate: {
+                is: {
+                    args: ["^([a-z]|[а-я]){2,15}$",'i'],
+                    msg:  'User surname must be higher than 1 symbol and lower 16'
+                }
+            }
         },
         birthday: {
-            type: Datatypes.DATEONLY
+            type: Datatypes.DATEONLY,
+            validate: {
+                isAfter: {
+                    args: '1910-01-01',
+                    msg: 'Your age must be higher than 1910-01-01'
+                },
+                isBefore: {
+                    args: '2000-01-01',
+                    msg: 'Your age must be lower than 2000-01-01'
+                }
+            }
         },
         male: {
             type: Datatypes.STRING(10)
@@ -35,9 +57,9 @@ module.exports = (sequelize, Datatypes) => {
             }
         },
         instanceMethods: {
-            createUserProfile: (profile, user, cb) => {
+            createUserProfile: (profile, user,models, cb) => {
                 let username = user.username;
-                User_profile.findOne({user_username: username}).then(item => {
+                models.Profile.findOne({ where: {user_username: username}}).then(item => {
                     if (!item || item.length === 0) {
                         User_profile.create(profile).then(
                             user_profile => {
@@ -46,7 +68,7 @@ module.exports = (sequelize, Datatypes) => {
                                 cb(null, user_profile);
                             },
                             err => {
-                                cb(null);
+                                cb(err);
                             }
                         );
                     }
@@ -56,7 +78,7 @@ module.exports = (sequelize, Datatypes) => {
                                 cb(null, item);
                             },
                             err => {
-                                cb(null);
+                                cb(err);
                             }//data
                         )
                     }

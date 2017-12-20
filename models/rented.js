@@ -1,5 +1,5 @@
 module.exports = (sequelize, Datatypes) => {
-    var Rented = sequelize.define("Rented", {
+    let Rented = sequelize.define("Rented", {
         rented_id: {
             type: Datatypes.INTEGER,
             primaryKey: true,
@@ -7,6 +7,7 @@ module.exports = (sequelize, Datatypes) => {
         },
         price_for_month: {
             type: Datatypes.INTEGER,
+            allowNull: false,
             validate: {
                 min: {
                     args: 100,
@@ -30,15 +31,34 @@ module.exports = (sequelize, Datatypes) => {
                     msg: 'Term of rented must be lower than 2200-01-01'
                 }
             },
-            defaultValue: '0000-00-00'
 
         },
-        full_time: {type: Datatypes.ENUM("1","0")}
+        full_time: {
+            type: Datatypes.ENUM("1","0"),
+            allowNull: false
+        }
+    }, {
+        hooks: {
+            beforeCreate : (instance, options) => {
+                if (Number(instance.full_time)){
+                    instance.term_of_rented = null;
+                } else if (!instance.term_of_rented){
+                    throw {errors: [{message: 'If you are choosing part time, please write down the date!', path: 'add-rented'}]};
+                }
+            },
+            beforeUpdate:(instance, options) => {
+                if (Number(instance.full_time)){
+                    instance.term_of_rented = null;
+                } else if (!instance.term_of_rented){
+                    throw {errors: [{message: 'If you are choosing part time, please write down the date!', path: 'add-rented'}]};
+                }
+            }
+        }
     });
     Rented.associate = (models) => {
         models.Rented.belongsTo(models.Flat, {foreignKey: {name: "flat_id" ,allowNull: false}});
         models.Rented.belongsTo(models.Profile, {foreignKey: {name: "profile_id" ,allowNull: false}});
-        models.Rented.belongsTo(models.Customer, {foreignKey: { name: "cust_id", allowNull: false}, onDelete: 'CASCADE'});
+        models.Rented.belongsTo(models.Customer, {foreignKey: { name: "customer_id", allowNull: false}, onDelete: 'CASCADE'});
     };
     return Rented;
 };

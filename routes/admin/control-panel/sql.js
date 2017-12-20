@@ -14,12 +14,12 @@ exports.post =  (req,res,next) => {
                     res.send({result: items});
                 }
             })
-    }else {
+    }
+    else {
         if (query.length == 0){
             res.status('403').send({message:"Please write something."});
-        }else {
+        } else {
             res.status('403').send({message: "You don't have enough permission"});
         }
     }
-
 };

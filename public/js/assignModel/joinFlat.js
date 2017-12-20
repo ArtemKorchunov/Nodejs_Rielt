@@ -6,13 +6,14 @@ module.exports = (items) => {
                 _id: flat.flat_id,
                 city: flat.city,
                 street: flat.street,
+                building: flat.building,
                 flat: flat.flat,
                 room_amount: flat.room_amount,
                 stage: flat.stage,
                 total_floors: flat.total_floors,
                 size: flat.size,
                 service: (flat.service == '1' ? 'Sale' : 'Rent'),
-                seller : [`${flat['Seller.surname']} ${flat['Seller.name']} ${flat['Seller.last_name']}`]
+                owner : [`${flat['Owner.surname']} ${flat['Owner.name']} ${flat['Owner.last_name']}`]
             }
         )
     });

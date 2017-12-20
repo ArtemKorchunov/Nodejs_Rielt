@@ -3,6 +3,7 @@ let findSoldout =  require('../joinModelsFindAll/joinSoldout');
 module.exports = (models,options = {}) => {
     let type = options.type;
     let name = options.name;
+    name = name === 'agent'? 'profile' : name;
     if (name === 'customer'){
         options = [
             [models.Customer, 'surname', type],

@@ -1,0 +1,51 @@
+<% layout('../../../layouts/user/control-panel/medium-search/addPattern')%>
+
+<form id="req-form" class="universal-form rented">
+    <input type="hidden" id="hidden-input-in-form">
+    <div class=" offset-1 col-10 align-self-center" id="wrapper-form">
+        <div class="form-group">
+            <label for="dateInput">Price for month</label>
+            <div class="row ml-0">
+                <input type="number" name="price_for_month from" id="NameInput" min="0"  placeholder="from" class="form-control col-5">
+                <input type="number" name="price_for_month to" id="SurnameInput" min="0"  placeholder="to" class="form-control offset-1 col-6">
+            </div>
+        </div>
+        <div class="form-group ml-1">
+            <label class="custom-control custom-radio">
+                <input id="radio1" name="full_time" value="1" type="radio" class="custom-control-input form-control" checked>
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">Full time</span>
+            </label>
+            <label class="custom-control custom-radio">
+                <input id="radio2" name="full_time" value="0" type="radio" class="custom-control-input form-control">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">Part time</span>
+            </label>
+        </div>
+        <div class="form-group">
+            <div class="row ml-0">
+                <input type="date" name="term_of_rented from" id="NameInput" placeholder="from" class="form-control col-5 term-date-input">
+                <input type="date" name="term_of_rented to" id="SurnameInput" placeholder="to" class="form-control offset-1 col-6 term-date-input">
+            </div>
+        </div>
+        <%-partial('../../../partials/user/searchflat-items')%>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id="universal-cancel" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" id="universal-submit" >Create owner</button>
+    </div>
+</form>
+<script>
+    $("input.custom-control-input").on( "click" , function () {
+        var d = $(this).val()
+        if ($(this).val() === "1")  {
+            $(".term-date-input").attr("disabled", true).val("");
+        } else {
+            $(".term-date-input").removeAttr("disabled");
+        }
+    });
+    $(".term-date-input").attr("disabled", true);
+</script>
+<script src="/js/print-toggle.js"></script>
+<script src="/js/ajax/user/control-panel/search-universal.js" ></script>

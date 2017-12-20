@@ -1,6 +1,6 @@
 module.exports = (sequelize, Datatypes) => {
     let Customer = sequelize.define("Customer", {
-        cust_id: {
+        customer_id: {
             type: Datatypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
@@ -10,7 +10,7 @@ module.exports = (sequelize, Datatypes) => {
             unique: true,
             validate: {
                 is: {
-                    args: ["^(([A-Z]{2})|([А-Я]{2})){1}[1-9]{6}$",'ig'],
+                    args: ["^(([A-Z]{2})|([А-Я]{2}))[1-9][0-9]{5}$",'ig'],
                     msg: 'The format of passport must be like AA111111'
                 }
             }
@@ -56,8 +56,8 @@ module.exports = (sequelize, Datatypes) => {
         }
     });
     Customer.associate = (models) => {
-        models.Customer.hasMany(models.Soldout, {foreignKey: { name: "cust_id", allowNull: false}});
-        models.Customer.hasMany(models.Rented, {foreignKey: { name: "cust_id"}});
+        models.Customer.hasMany(models.Soldout, {foreignKey: { name: "customer_id"}});
+        models.Customer.hasMany(models.Rented, {foreignKey: { name: "customer_id"}});
     };
     return Customer;
 };

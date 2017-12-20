@@ -3,6 +3,7 @@ let findRented =  require('../joinModelsFindAll/joinRented');
 module.exports = (models,options = {}) => {
     let type = options.type;
     let name = options.name;
+    name = name === 'agent'? 'profile' : name;
     if (name === 'customer'){
         options = [
             [models.Customer, 'surname', type],

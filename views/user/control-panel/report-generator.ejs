@@ -1,0 +1,37 @@
+<% layout('../../layouts/page.ejs')%>
+
+<% stylesheet('/css/admin.css') %>
+<div class="container-fluid">
+    <div class="row">
+        <%-partial('../../partials/leftNav')%>
+        <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
+            <div class="btn-group inprint-vanish" id="inprint-vanish">
+                <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-print mr-2" aria-hidden="true"></i>Print
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" id="print-deal-summary" href="#">Agent deal's summary</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" id="print-amount-loc" href="#">Separated link</a>
+                </div>
+            </div>
+            <div class="table-responsive print-content" id="print-content" style="display: none">
+                <table class="table table-striped search-name" id="" style="">
+                    <thead>
+                        <tr id="tr-header">
+                            <th></th>
+
+                        </tr>
+                    </thead>
+                    <tbody id="tbody">
+                        <tr></tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+</div>
+
+<script src="/js/print-toggle.js"></script>
+<script src="/js/ajax/user/control-panel/print.js"></script>
