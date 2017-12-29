@@ -5,7 +5,16 @@ var path      = require('path');
 var Sequelize = require('sequelize');
 var basename  = path.basename(__filename);
 var env       = process.env.NODE_ENV || 'development';
-var config    = require('../config/config.js')[env];
+var config    =  {
+        host: 'us-cdbr-iron-east-05.cleardb.net',
+        user: 'b1e8a33110188a',
+        password: 'cf941299',
+        database: 'heroku_5dd0bb320a4d88c',
+        dialect: 'mysql',
+        charset: 'utf8',
+        collate: 'utf8_general_ci',
+        operatorsAliases: false
+    };
 var db        = {};
 
 if (config.use_env_variable) {
