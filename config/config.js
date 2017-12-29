@@ -9,11 +9,12 @@ module.exports = {
     //     dialect: "sqlite",
     //     storage: ":memory:"
     // },
+    
     development: {
-        username: 'root',
-        password: '',
-        database: 'rielt',
-        host: '127.0.0.1',
+        host: 'us-cdbr-iron-east-05.cleardb.net',
+        user: 'b1e8a33110188a',
+        password: 'cf941299',
+        database: 'heroku_5dd0bb320a4d88c',
         dialect: 'mysql',
         charset: 'utf8',
         collate: 'utf8_general_ci',

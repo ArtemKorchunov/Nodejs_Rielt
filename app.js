@@ -14,11 +14,11 @@ app.set('port', config.get('port'));
 
 var MySQLStore = require('express-mysql-session')(session);
 var options = {
-    host: '127.0.0.1',
-    port: 3306,
-    user: 'root',
-    password: '',
-    database: 'rielt'
+  host: 'us-cdbr-iron-east-05.cleardb.net',
+  port: 3306,
+  user: 'b1e8a33110188a',
+  password: 'cf941299',
+  database: 'heroku_5dd0bb320a4d88c'
 };
 
 var sessionStore = new MySQLStore(options);
